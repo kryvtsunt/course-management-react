@@ -1,5 +1,5 @@
 import React from 'react'
-import CourseCard from './CourseCard'
+import CourseCard from '../components/CourseCard'
 
 export default class CourseManager extends React.Component {
     render() {

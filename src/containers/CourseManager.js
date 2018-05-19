@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
-import CourseCard from './CourseCard'
-import CourseDeck from './CourseDeck'
-
+import CardDeck from './CardDeck'
+import ModuleList from './ModuleList'
+import LessonTabs from './LessonTabs'
 export default class CourseManager extends Component {
     render() {
         return (
             <div className="container-fluid">
                 <h1> Course Manager</h1>
-                <CourseDeck/>
+                <LessonTabs/>
+                <ModuleList/>
+                <CardDeck/>
             </div>
 
         )
