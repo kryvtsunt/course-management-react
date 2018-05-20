@@ -5,10 +5,10 @@ export default class ModuleList
     extends React.Component {
     render() { return (
         <ul className="list-group">
-            <ModuleListItem/>
-            <ModuleListItem/>
-            <ModuleListItem/>
-            <ModuleListItem/>
-            <ModuleListItem/>
+            <ModuleListItem title="1"/>
+            <ModuleListItem title="1"/>
+            <ModuleListItem title="1"/>
+            <ModuleListItem title="1"/>
+            <ModuleListItem title="1"/>
         </ul>
     );}}

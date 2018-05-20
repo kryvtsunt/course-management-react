@@ -6,7 +6,12 @@ import HelloWorld from './hello'
 
 
 import CourseManager from './containers/CourseManager'
+import Stateless from "./components/Stateless";
+
 ReactDom.render(
-    <CourseManager/>,
+    <div>
+        <Stateless message="this is Stateless"/>
+        <CourseManager/>
+    </div>,
     document.getElementById('root')
 );
