@@ -9,8 +9,7 @@ import CourseManager from './containers/CourseManager'
 import Stateless from "./components/Stateless";
 
 ReactDom.render(
-    <div>
-        <Stateless message="this is Stateless"/>
+    <div className="container-fluid">
         <CourseManager/>
     </div>,
     document.getElementById('root')

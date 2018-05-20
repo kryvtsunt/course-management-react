@@ -6,11 +6,11 @@ export default class LessonTabs
     extends React.Component {
     render() {
         return (
-            <div>
-                <ul class="nav nav-tabs">
-                    <li class="nav-item"><a class="nav-link active"
+            <div className="container-fluid">
+                <ul className="nav nav-tabs">
+                    <li className="nav-item"><a className="nav-link active"
                                             href="#">Active Tab</a></li>
-                    <li class="nav-item"><a class="nav-link"
+                    <li className="nav-item"><a className="nav-link"
                                             href="#">Another Tab</a></li>
                 </ul>
                 <br/>
