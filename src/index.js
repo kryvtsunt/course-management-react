@@ -5,6 +5,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 
 import CourseManager from './containers/CourseManager'
+
 import Stateless from "./components/Stateless";
 
 ReactDom.render(

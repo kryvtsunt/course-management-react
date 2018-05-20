@@ -43,7 +43,6 @@ export default class ModuleList
     render() {
         return (
             <div className="container-fluid">
-                <br/>
                 <input className="form-control"
                        onChange={this.titleChanged}
                        placeholder="title"/>
