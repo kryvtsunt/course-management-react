@@ -8,7 +8,7 @@ class CourseList extends React.Component {
         return (
             <div>
             <h2>Course List</h2>
-                <table>
+                <table className="table">
                     <thead><tr><th>Title</th></tr></thead>
                     <tbody>
                     <CourseRow/>
