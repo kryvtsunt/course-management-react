@@ -34,28 +34,25 @@ class CourseList extends React.Component {
     }
 
     deleteCourse(courseId) {
+        console.log('delete ' + courseId);
         this.courseService
-            .deleteCourse(courseId);
-    }
-
-    courseRows() {
-        var rows = this.state.courses.map((course) => {
-            return <CourseRow course={course} key={course.id}
-                              delete={this.deleteCourse}/>
+            .deleteCourse(courseId)
+            .then(() => {
+            this.findAllCourses();
         });
     }
 
 
     renderCourseRows() {
         let courses = null;
+        let deleteCourse = this.deleteCourse;
         if (this.state) {
             courses = this.state.courses.map(
                 function (course) {
-                    return <CourseRow key={course.id} course={course}/>
-                }
-            )
+                    return <CourseRow key={course.id} course={course}  delete={deleteCourse}/>
+                });
         }
-        return (courses)
+        return (courses);
     }
 
     titleChanged(event) {

@@ -15,6 +15,16 @@ export default class ModuleService {
     }
 
 
+    findAllModulesForCourse(courseId) {
+        return fetch(
+            MODULE_API_URL
+                .replace('CID', courseId))
+            .then(function (response) {
+                return response.json();
+            })
+    }
+
+
     createModule(courseId, module) {
         return fetch(MODULE_API_URL.replace('CID', courseId),
             {
@@ -23,6 +33,15 @@ export default class ModuleService {
                 method: 'POST'
             }).then(function (response) {
             return response.json();
+        })
+    }
+
+    deleteModule(courseId, moduleId) {
+        return fetch(MODULE_API_URL.replace('CID', courseId) +'/' + moduleId,
+            {
+                method: 'DELETE'
+            }).then(function (response) {
+            return response;
         })
     }
 }
