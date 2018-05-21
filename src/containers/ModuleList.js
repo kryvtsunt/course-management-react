@@ -3,9 +3,10 @@ import ModuleListItem from '../components/ModuleListItem'
 
 export default class ModuleList
     extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            courseId: '',
             module: {title: ''},
             modules: [
                 {title: 'Module 1 - jQuery', id: 123},
@@ -17,9 +18,24 @@ export default class ModuleList
             ]
         };
 
+        this.setCourseId = this.setCourseId.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.createModule = this.createModule.bind(this);
     }
+
+    componentDidMount() {
+        this.setCourseId(this.props.courseId);
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setCourseId(newProps.courseId);
+    }
+
+
+    setCourseId(courseId) {
+        this.setState({courseId: courseId});
+    }
+
 
     titleChanged(event) {
         console.log(event.target.value);
@@ -43,6 +59,7 @@ export default class ModuleList
     render() {
         return (
             <div className="container-fluid">
+                <h3> Module List for course: {this.state.courseId}</h3>
                 <input className="form-control"
                        onChange={this.titleChanged}
                        placeholder="title"/>
