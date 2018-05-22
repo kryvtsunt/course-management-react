@@ -13,7 +13,7 @@ export default class LessonTabb
 
             <li className="nav-item">
                 <Link className="text-white nav-link active"
-                      to={`/course/${this.props.course.id}/module/${this.props.module.id}/lesson/${this.props.lesson.id}`}>
+                      to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
                     {this.props.course.title}
                 </Link>
             </li>

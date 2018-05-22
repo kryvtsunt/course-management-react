@@ -10,7 +10,7 @@ export default class LessonService {
 
     static get instance() {
         if (!this[_singleton])
-            this[_singleton] = new ModuleService(_singleton);
+            this[_singleton] = new LessonService(_singleton);
         return this[_singleton]
     }
 

@@ -22,11 +22,12 @@ export default class ModuleList
 
     componentDidMount() {
         this.setCourseId(this.props.courseId);
+        //this.findAllModulesForCourse(this.props.courseId);
     }
 
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.courseId);
-        this.findAllModulesForCourse(newProps.courseId)
+        this.findAllModulesForCourse(newProps.courseId);
     }
 
 

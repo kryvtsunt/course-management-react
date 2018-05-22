@@ -1,5 +1,6 @@
 import React from 'react'
 import TopicPills from './TopicPills'
+import LessonTab from '../components/LessonTabb'
 import LessonService from '../services/LessonService'
 
 export default class LessonTabs
@@ -14,85 +15,94 @@ export default class LessonTabs
             lessons: []
         };
 
-        this.setLessonId = this.setCourseId.bind(this);
+        this.setCourseId = this.setCourseId.bind(this);
+        this.setModuleId = this.setModuleId.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
-        this.createModule = this.createModule.bind(this);
-        this.deleteModule = this.deleteModule.bind(this);
-        this.moduleService = ModuleService.instance;
+        this.createLesson = this.createLesson.bind(this);
+        // this.deleteLesson = this.deleteLesson.bind(this);
+        this.lessonService = LessonService.instance;
     };
 
     componentDidMount() {
         this.setCourseId(this.props.courseId);
+        this.setModuleId(this.props.moduleId);
+        this.findAllLessons(this.props.moduleId);
+
     }
 
-    componentWillReceiveProps(newProps) {
-        this.setCourseId(newProps.courseId);
-        this.findAllModulesForCourse(newProps.courseId)
-    }
-
-
-    setModules(modules) {
-        this.setState({modules: modules})
-    }
 
     setCourseId(courseId) {
         this.setState({courseId: courseId});
     }
 
+    setModuleId(moduleId) {
+        this.setState({moduleId: moduleId});
+    }
+
 
     titleChanged(event) {
         console.log(event.target.value);
-        this.setState({module: {title: event.target.value}});
+        this.setState({lesson: {title: event.target.value}});
     }
 
-    findAllModulesForCourse(courseId) {
-        this.moduleService
-            .findAllModulesForCourse(courseId)
-            .then((modules) => {
-                this.setModules(modules)
+    findAllLessons(moduleId) {
+        this.lessonService.findAllLessons(moduleId)
+            .then((lessons) => {
+                this.setLessons(lessons)
             });
     }
 
+    setLessons(lessons) {
+        this.setState({lessons: lessons})
+    }
 
-    createModule(event) {
-        console.log(this.state.module);
-        this.moduleService
-            .createModule(this.state.courseId, this.state.module)
+
+    createLesson(event) {
+        this.lessonService
+            .createLesson(this.state.moduleId, this.state.lesson)
             .then(() => {
-                this.findAllModulesForCourse(this.state.courseId);
+                this.findAllLessons(this.state.moduleId);
             });
     }
 
-    deleteModule(moduleId) {
-        console.log('delete ' + moduleId);
-        this.moduleService
-            .deleteModule(moduleId)
-            .then(() => {
-                this.findAllModulesForCourse(this.state.courseId);
-            });
-    }
+    //
+    // deleteLesson(lessonId) {
+    //     console.log('delete ' + lessonId);
+    //     this.moduleService
+    //         .deleteModule(moduleId)
+    //         .then(() => {
+    //             this.findAllModulesForCourse(this.state.courseId);
+    //         });
+    // }
 
     renderLessons() {
-        let deleteModule = this.deleteModule;
+        //let deleteLesson = this.deleteLesson;
         let courseId = this.state.courseId;
-        let modules = null;
-        if (this.state){
-            modules = this.state.modules.map(function (module) {
-                return <ModuleListItem
-                    courseId={courseId} module={module} key={module.id} delete={deleteModule}/>
+        let moduleId = this.state.moduleId;
+        let lessons = null;
+        if (this.state) {
+            lessons = this.state.lessons.map(function (lesson) {
+                return <LessonTab
+                    moduleId={moduleId} courseId={courseId} lesson={lesson} key={lesson.id}/>
             });
         }
-        return modules;
+        return lessons;
     }
 
     render() {
         return (
             <div className="container-fluid">
                 <ul className="nav nav-tabs ">
-                    <li className="nav-item"><a className="nav-link active"
-                                                href="#">Active Tab</a></li>
-                    <li className="nav-item"><a className="nav-link"
-                                                href="#">Another Tab</a></li>
+                    {this.renderLessons()}
+                    <li className="nav-item">
+                        <input className="form-control"
+                               onChange={this.titleChanged}
+                               placeholder="title"/>
+                    </li>
+                    <li className="nav-item">
+                        <i onClick={this.createLesson} className="btn fa fa-plus">
+                        </i>
+                    </li>
                 </ul>
             </div>
 
