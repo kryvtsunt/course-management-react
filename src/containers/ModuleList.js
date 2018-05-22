@@ -89,16 +89,15 @@ export default class ModuleList
         return (
                 <div className="container-fluid">
                     {/*<h3> Module List for course: {this.state.courseId}</h3>*/}
-                    <input className="form-control"
-                           onChange={this.titleChanged}
-                           placeholder="title"/>
-                    <button onClick={this.createModule} className="btn btn-primary btn-block">
-                        <i className="fa fa-plus"></i>
-                    </button>
-                    <br/>
                     <ul className="list-group">
                         {this.renderListOfModules()}
                     </ul>
+                    <input className="form-control"
+                           onChange={this.titleChanged}
+                           placeholder="title"/>
+                    <button onClick={this.createModule} className="btn btn-dark btn-block">
+                        <i className="fa fa-plus"></i>
+                    </button>
                 </div>
 
         );

@@ -41,8 +41,8 @@ class CourseList extends React.Component {
         this.courseService
             .deleteCourse(courseId)
             .then(() => {
-            this.findAllCourses();
-        });
+                this.findAllCourses();
+            });
     }
 
 
@@ -52,7 +52,7 @@ class CourseList extends React.Component {
         if (this.state) {
             courses = this.state.courses.map(
                 function (course) {
-                    return <CourseRow key={course.id} course={course}  delete={deleteCourse}/>
+                    return <CourseRow key={course.id} course={course} delete={deleteCourse}/>
                 });
         }
         return (courses);
@@ -68,31 +68,38 @@ class CourseList extends React.Component {
     render() {
         return (
             <div>
-                <h2>Course List</h2>
-                <table className="table">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input onChange={this.titleChanged}
-                                   className="form-control"
-                                   id="titleFld"
-                                   placeholder="CS101"/>
-                        </th>
-                        <th>
-                            <button onClick={this.createCourse}
-                                    className="btn btn-primary">
-                                Add
-                            </button>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderCourseRows()}
-                    </tbody>
-                </table>
+                <div className="container-fluid">
+                    <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+                        <span className="navbar-brand">
+                        <h2>Course List</h2>
+                        </span>
+                    </nav>
+                </div>
+                <div className="container-fluid">
+                    <table className="table table-dark">
+                        <thead>
+                        {/*<tr>*/}
+                            {/*<th>Title</th>*/}
+                        {/*</tr>*/}
+                        <tr>
+                            <th>
+                                <input onChange={this.titleChanged}
+                                       className="form-control"
+                                       id="titleFld"
+                                       placeholder="CS101"/>
+                            </th>
+                            <th>
+                                <i onClick={this.createCourse}
+                                        className="btn btn-outline-dark fa fa-plus">
+                                </i>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.renderCourseRows()}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }
