@@ -2,6 +2,7 @@ import React from 'react'
 import ModuleListItem from '../components/ModuleListItem'
 import ModuleService from '../services/ModuleService'
 
+
 export default class ModuleList
     extends React.Component {
     constructor(props) {
@@ -23,7 +24,7 @@ export default class ModuleList
         this.setCourseId(this.props.courseId);
     }
 
-    componentWillReceiveProps(newProps){
+    componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.courseId);
         this.findAllModulesForCourse(newProps.courseId)
     }
@@ -32,7 +33,6 @@ export default class ModuleList
     setModules(modules) {
         this.setState({modules: modules})
     }
-
 
     setCourseId(courseId) {
         this.setState({courseId: courseId});
@@ -47,7 +47,9 @@ export default class ModuleList
     findAllModulesForCourse(courseId) {
         this.moduleService
             .findAllModulesForCourse(courseId)
-            .then((modules) => {this.setModules(modules)});
+            .then((modules) => {
+                this.setModules(modules)
+            });
     }
 
 
@@ -60,42 +62,45 @@ export default class ModuleList
             });
     }
 
-    deleteModule(courseId, moduleId) {
-        console.log('delete ' + courseId + ' ' + moduleId);
+    deleteModule(moduleId) {
+        console.log('delete ' + moduleId);
         this.moduleService
-            .deleteModule(courseId, moduleId)
+            .deleteModule(moduleId)
             .then(() => {
-                this.findAllModulesForCourse(courseId);
+                this.findAllModulesForCourse(this.state.courseId);
             });
     }
 
     renderListOfModules() {
         let deleteModule = this.deleteModule;
-        let courseId = this.state.courseId
-        let modules = this.state.modules
-            .map(function (module) {
+        let courseId = this.state.courseId;
+        let modules = null;
+        if (this.state){
+            modules = this.state.modules.map(function (module) {
                 return <ModuleListItem
-                    module={module} courseId={courseId} key={module.id} delete={deleteModule}/>
+                    courseId={courseId} module={module} key={module.id} delete={deleteModule}/>
             });
+        }
         return modules;
     }
 
 
     render() {
         return (
-            <div className="container-fluid">
-                <h3> Module List for course: {this.state.courseId}</h3>
-                <input className="form-control"
-                       onChange={this.titleChanged}
-                       placeholder="title"/>
-                <button onClick={this.createModule} className="btn btn-primary btn-block">
-                    <i className="fa fa-plus"></i>
-                </button>
-                <br/>
-                <ul className="list-group">
-                    {this.renderListOfModules()}
-                </ul>
-            </div>
+                <div className="container-fluid">
+                    {/*<h3> Module List for course: {this.state.courseId}</h3>*/}
+                    <input className="form-control"
+                           onChange={this.titleChanged}
+                           placeholder="title"/>
+                    <button onClick={this.createModule} className="btn btn-primary btn-block">
+                        <i className="fa fa-plus"></i>
+                    </button>
+                    <br/>
+                    <ul className="list-group">
+                        {this.renderListOfModules()}
+                    </ul>
+                </div>
+
         );
     }
 }

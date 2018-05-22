@@ -6,7 +6,10 @@ class CourseList extends React.Component {
     constructor() {
         super();
         this.courseService = CourseService.instance;
-        this.state = {courses: []};
+        this.state = {
+            course: {title: ''},
+            courses: []
+        };
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
