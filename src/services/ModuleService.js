@@ -36,6 +36,13 @@ export default class ModuleService {
         })
     }
 
+    findModuleById(moduleId) {
+        return fetch('http://localhost:8080/api/module/' + moduleId)
+            .then(function (response) {
+                return response.json();
+            });
+    }
+
     deleteModule(moduleId) {
         return fetch('http://localhost:8080/api/module/'+ moduleId,
             {
