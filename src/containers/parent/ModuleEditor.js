@@ -20,7 +20,7 @@ export default class ModuleManager
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setCourseId(this.props.match.params.courseId);
         this.setModuleId(this.props.match.params.moduleId);
         this.findModuleById(this.props.match.params.moduleId);
@@ -56,6 +56,7 @@ export default class ModuleManager
                     {this.state.module.title}
                 </h2>
                 <LessonTabs courseId={this.props.match.params.courseId} moduleId={this.props.match.params.moduleId}/>
+                {/*Will not work if pass state*/}
                 <hr/>
                 <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={TopicPills}/>
             </div>

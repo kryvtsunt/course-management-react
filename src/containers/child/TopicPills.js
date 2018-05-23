@@ -20,15 +20,15 @@ export default class TopicPills
         this.titleChanged = this.titleChanged.bind(this);
         this.createTopic = this.createTopic.bind(this);
         // this.deleteTopic = this.deleteTopic.bind(this);
-        this.findAllTopics = this.findAllTopics(this);
+        this.findAllTopics = this.findAllTopics.bind(this);
         this.topicService = TopicService.instance;
     }
 
-    componentDidMount() {
-        this.setCourseId(this.props.match.param.courseId);
-        this.setModuleId(this.props.match.param.moduleId);
-        this.setLessonId(this.props.match.param.lessonId);
-        this.findAllTopics(this.props.courseId, this.props.moduleId, this.props.lessonId);
+    componentWillMount() {
+        // this.setCourseId(this.props.match.param.courseId);
+        // this.setModuleId(this.props.match.param.moduleId);
+        // this.setLessonId(this.props.match.param.lessonId);
+        //this.findAllTopics(this.props.courseId, this.props.moduleId, this.props.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
@@ -42,9 +42,11 @@ export default class TopicPills
     setCourseId(courseId) {
         this.setState({courseId: courseId});
     }
+
     setModuleId(moduleId) {
         this.setState({moduleId: moduleId});
     }
+
     setLessonId(lessonId) {
         this.setState({lessonId: lessonId});
     }
@@ -54,8 +56,8 @@ export default class TopicPills
     }
 
     findAllTopics(courseId, moduleId, lessonId) {
-        this.moduleService
-            .findAllModulesForCourse(courseId, moduleId, lessonId)
+        this.topicService
+            .findAllTopics(courseId, moduleId, lessonId)
             .then((topics) => {
                 this.setTopics(topics)
             });
@@ -70,7 +72,7 @@ export default class TopicPills
 
     createTopic(event) {
         this.topicService
-            .createModule(this.state.courseId, this.state.moduleId, this.state.lessonId, this.state.topic)
+            .createTopic(this.state.courseId, this.state.moduleId, this.state.lessonId, this.state.topic)
             .then(() => {
                 this.findAllModulesForCourse(this.state.courseId, this.state.moduleId, this.state.lessonId);
             });
@@ -91,7 +93,7 @@ export default class TopicPills
         let moduleId = this.state.moduleId;
         let lessonId = this.state.lessonId;
         let topics = null;
-        if (this.state){
+        if (this.state) {
             topics = this.state.topics.map(function (topic) {
                 return <TopicPill
                     courseId={courseId} moduleId={moduleId} lessonId={lessonId} topic={topic} key={module.id}/>

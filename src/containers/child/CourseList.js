@@ -15,7 +15,7 @@ class CourseList extends React.Component {
         this.deleteCourse = this.deleteCourse.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.findAllCourses();
     }
 

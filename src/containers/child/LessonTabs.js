@@ -26,11 +26,17 @@ export default class LessonTabs
         this.lessonService = LessonService.instance;
     };
 
-    componentDidMount() {
+    componentWillMount() {
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
-        this.findAllLessons(this.props.courseId, this.props.moduleId);
+        //this.findAllLessons(this.props.courseId, this.props.moduleId);
 
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setCourseId(newProps.courseId);
+        this.setModuleId(newProps.moduleId);
+        this.findAllLessons(newProps.courseId, this.props.moduleId);
     }
 
     setCourseId(courseId) {

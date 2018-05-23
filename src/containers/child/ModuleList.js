@@ -17,10 +17,12 @@ export default class ModuleList
         this.titleChanged = this.titleChanged.bind(this);
         this.createModule = this.createModule.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
+        this.findAllModulesForCourse = this.findAllModulesForCourse.bind(this);
+        this.setModules = this.setModules.bind(this);
         this.moduleService = ModuleService.instance;
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setCourseId(this.props.courseId);
         this.findAllModulesForCourse(this.props.courseId);
     }

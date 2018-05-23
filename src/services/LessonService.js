@@ -34,13 +34,13 @@ export default class LessonService {
             return response.json();
         })
     }
-
-    deleteLesson(lessonId) {
-        return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId)+ '/' + lessonId,
-            {
-                method: 'DELETE'
-            }).then(function (response) {
-            return response;
-        })
-    }
+    //
+    // deleteLesson(lessonId) {
+    //     return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId)+ '/' + lessonId,
+    //         {
+    //             method: 'DELETE'
+    //         }).then(function (response) {
+    //         return response;
+    //     })
+    // }
 }
