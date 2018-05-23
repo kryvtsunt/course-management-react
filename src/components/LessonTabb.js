@@ -10,16 +10,18 @@ export default class LessonTabb
 
     render() {
         return (
-
             <li className="nav-item">
-                <Link className="text-white nav-link active"
-                      to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
-                    {this.props.course.title}
-                </Link>
+
+                    <Link className="bg-dark text-white nav-link active"
+                          to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+                        {this.props.lesson.title}
+                    </Link>
+
             </li>
 
 
 
-        );
+    )
+        ;
     }
 }

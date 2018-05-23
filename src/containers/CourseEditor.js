@@ -2,7 +2,7 @@ import React from 'react'
 import ModuleList from './ModuleList'
 import ModuleEditor from './ModuleEditor'
 import CourseService from '../services/CourseSerice'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 export default class CourseEditor extends React.Component {
     constructor(props) {
@@ -54,11 +54,16 @@ export default class CourseEditor extends React.Component {
                 <div>
                     {/*<h2> Editing course: {this.state.courseId}</h2>*/}
                     <div className="container-fluid">
-                        <nav className="navbar navbar-expand-sm navbar-dark" style={{backgroundColor: '#202020'}}>
-                            <span className="navbar-brand" >
+                        <nav className="navbar navbar-dark" style={{backgroundColor: '#202020'}}>
+                            <span className="navbar-brand">
                                 <h2>
                                     {this.state.course.title}
                                 </h2>
+                            </span>
+                            <span className="navbar-right">
+                                <Link className="text-white" to={`/courses`}>
+                                    <i className="btn text-white fa fa-2x fa-home"></i>
+                                </Link>
                             </span>
                         </nav>
                     </div>

@@ -19,6 +19,9 @@ export default class LessonTabs
         this.setModuleId = this.setModuleId.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.createLesson = this.createLesson.bind(this);
+        this.findAllLessons = this.findAllLessons.bind(this);
+        this.renderLessons = this.renderLessons.bind(this);
+        this.titleChanged = this.titleChanged.bind(this);
         // this.deleteLesson = this.deleteLesson.bind(this);
         this.lessonService = LessonService.instance;
     };
@@ -26,7 +29,7 @@ export default class LessonTabs
     componentDidMount() {
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
-        this.findAllLessons(this.props.moduleId);
+        this.findAllLessons(this.props.courseId, this.props.moduleId);
 
     }
 
@@ -45,8 +48,8 @@ export default class LessonTabs
         this.setState({lesson: {title: event.target.value}});
     }
 
-    findAllLessons(moduleId) {
-        this.lessonService.findAllLessons(moduleId)
+    findAllLessons(courseId, moduleId) {
+        this.lessonService.findAllLessons(courseId, moduleId)
             .then((lessons) => {
                 this.setLessons(lessons)
             });
@@ -59,9 +62,9 @@ export default class LessonTabs
 
     createLesson(event) {
         this.lessonService
-            .createLesson(this.state.moduleId, this.state.lesson)
+            .createLesson(this.state.courseId, this.state.moduleId, this.state.lesson)
             .then(() => {
-                this.findAllLessons(this.state.moduleId);
+                this.findAllLessons(this.state.courseId, this.state.moduleId, this.state.lesson);
             });
     }
 

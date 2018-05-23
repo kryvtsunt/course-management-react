@@ -1,5 +1,5 @@
 const Lesson_API_URL =
-    'http://localhost:8080/module/MID/lesson';
+    'http://localhost:8080/api/course/CID/module/MID/lesson';
 let _singleton = Symbol();
 
 export default class LessonService {
@@ -15,23 +15,22 @@ export default class LessonService {
     }
 
 
-    findAllLessons(moduleId) {
-        return fetch(
-            Lesson_API_URL
-                .replace('MID', moduleId))
+    findAllLessons(courseId, moduleId) {
+        return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId))
             .then(function (response) {
                 return response.json();
             })
     }
 
 
-    createLesson(moduleId, lesson) {
-        return fetch(Lesson_API_URL.replace('MID', moduleId),
+    createLesson(courseId, moduleId, lesson) {
+        return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId),
             {
-                body: JSON.stringify(module),
+                body: JSON.stringify(lesson),
                 headers: {'Content-Type': 'application/json'},
                 method: 'POST'
-            }).then(function (response) {
+            })
+            .then(function (response) {
             return response.json();
         })
     }

@@ -76,11 +76,8 @@ class CourseList extends React.Component {
                     </nav>
                 </div>
                 <div className="container-fluid">
-                    <table className="table table-dark">
+                    <table className="table table-dark ">
                         <thead>
-                        {/*<tr>*/}
-                            {/*<th>Title</th>*/}
-                        {/*</tr>*/}
                         <tr>
                             <th>
                                 <input onChange={this.titleChanged}
@@ -90,10 +87,16 @@ class CourseList extends React.Component {
                             </th>
                             <th>
                                 <i onClick={this.createCourse}
-                                        className="btn btn-outline-dark fa fa-plus">
+                                   className="btn btn-outline-dark fa fa-plus">
                                 </i>
                             </th>
                         </tr>
+                        <tr>
+                            <th>Title</th>
+                            <th>Owned by</th>
+                            <th>Last modified</th>
+                        </tr>
+
                         </thead>
                         <tbody>
                         {this.renderCourseRows()}
