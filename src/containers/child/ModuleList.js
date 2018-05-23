@@ -1,6 +1,6 @@
 import React from 'react'
-import ModuleListItem from '../components/ModuleListItem'
-import ModuleService from '../services/ModuleService'
+import ModuleListItem from '../../components/ModuleListItem'
+import ModuleService from '../../services/ModuleService'
 
 
 export default class ModuleList

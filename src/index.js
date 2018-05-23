@@ -4,7 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 
-import CourseManager from './containers/CourseManager'
+import CourseManager from './containers/parent/CourseManager'
 
 import Stateless from "./components/Stateless";
 

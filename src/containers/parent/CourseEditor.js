@@ -1,7 +1,7 @@
 import React from 'react'
-import ModuleList from './ModuleList'
+import ModuleList from '../child/ModuleList'
 import ModuleEditor from './ModuleEditor'
-import CourseService from '../services/CourseSerice'
+import CourseService from '../../services/CourseSerice'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 export default class CourseEditor extends React.Component {
@@ -73,10 +73,6 @@ export default class CourseEditor extends React.Component {
                         </div>
                         <div className="col-8">
                             <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
-                            {/*<h2>Lessons</h2>*/}
-                            {/*<LessonTabs*/}
-                            {/*moduleId={this.state.moduleId}*/}
-                            {/*/>*/}
                         </div>
                     </div>
 

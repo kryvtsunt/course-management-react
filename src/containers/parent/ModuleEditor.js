@@ -1,7 +1,7 @@
 import React from 'react'
-import TopicPills from './TopicPills'
-import LessonTabs from './LessonTabs'
-import ModuleService from '../services/ModuleService'
+import TopicPills from '../child/TopicPills'
+import LessonTabs from '../child/LessonTabs'
+import ModuleService from '../../services/ModuleService'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 

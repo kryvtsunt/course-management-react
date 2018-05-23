@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import CardDeck from './CardDeck'
+import CardDeck from '../child/CardDeck'
 import CourseEditor from './CourseEditor'
-import CourseList from './CourseList'
+import CourseList from '../child/CourseList'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 export default class CourseManager extends Component {
@@ -9,8 +9,6 @@ export default class CourseManager extends Component {
         return (
             <Router>
                 <div className="container-fluid">
-                    {/*<h1> Course Manager</h1>*/}
-
                     <Route path="/courses"
                            component={CourseList}>
                     </Route>
@@ -18,7 +16,6 @@ export default class CourseManager extends Component {
                            component={CourseEditor}>
                     </Route>
                 </div>
-                {/*<CardDeck/>*/}
             </Router>
 
         )

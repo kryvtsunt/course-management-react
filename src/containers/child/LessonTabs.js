@@ -1,7 +1,7 @@
 import React from 'react'
 import TopicPills from './TopicPills'
-import LessonTab from '../components/LessonTabb'
-import LessonService from '../services/LessonService'
+import LessonTab from '../../components/LessonTabb'
+import LessonService from '../../services/LessonService'
 
 export default class LessonTabs
     extends React.Component {
