@@ -24,7 +24,7 @@ export default class TopicPills
         this.topicService = TopicService.instance;
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setCourseId(this.props.match.params.courseId);
         this.setModuleId(this.props.match.params.moduleId);
         this.setLessonId(this.props.match.params.lessonId);
@@ -35,7 +35,7 @@ export default class TopicPills
         this.setCourseId(newProps.match.params.courseId);
         this.setModuleId(newProps.match.params.moduleId);
         this.setLessonId(newProps.match.params.lessonId);
-        // this.findAllTopics(newProps.match.params.courseId, newProps.match.params.moduleId, newProps.match.params.lessonId);
+        this.findAllTopics(newProps.match.params.courseId, newProps.match.params.moduleId, newProps.match.params.lessonId);
     }
 
 
@@ -106,7 +106,7 @@ export default class TopicPills
     render() {
         return (
             <div className="container-fluid">
-                <ul className="nav nav-tabs">
+                <ul className="nav nav-pills">
                     {this.renderListOfTopics()}
                     <li className="nav-item">
                         <div className="container-fluid">

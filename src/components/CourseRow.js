@@ -4,6 +4,21 @@ import { Link } from 'react-router-dom'
 class CourseRow extends React.Component {
     constructor(props) {
         super(props);
+        this.getDate = this.getDate.bind(this);
+    }
+
+    getDate(data){
+        let dates = String(data).split("T");
+        let date = dates[0];
+        return date
+    }
+
+    getTime(data){
+        let dates = String(data).split("T");
+        let raw = dates[1]
+        let time = raw.split(".")[0];
+        return time
+
     }
 
     render() {
@@ -15,8 +30,8 @@ class CourseRow extends React.Component {
                     </Link>
                 </td>
                 <td>Me</td>
-                <td>{this.props.course.created}</td>
-                <td>{this.props.course.modified}</td>
+                <td>{this.getDate(this.props.course.created) + ' | ' + this.getTime(this.props.course.created)}</td>
+                <td>{this.getDate(this.props.course.modified) + ' | ' + this.getTime(this.props.course.modified)}</td>
                     <i className="btn btn-block fa fa-2x fa-trash" onClick={() =>
                     {this.props.delete(this.props.course.id)}}>
                     </i>

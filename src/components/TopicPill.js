@@ -11,7 +11,7 @@ export default class TopicPill
     render() {
         return (
 
-            <li className="nav-item">
+            <li className="nav-item ">
                 <a className="nav-link bg-dark active"
                    href="#">
                     {this.props.topic.title}

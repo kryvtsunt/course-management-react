@@ -12,7 +12,7 @@ export default class LessonTabb
         return (
             <li className="nav-item">
 
-                    <Link className="bg-dark text-white nav-link active"
+                    <Link className="nav-link active"
                           to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
                         {this.props.lesson.title}
                     </Link>

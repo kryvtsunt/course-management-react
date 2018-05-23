@@ -10,7 +10,8 @@ export default class ModuleList
         this.state = {
             newModule: {title: ''},
             courseId: '',
-            modules: []
+            modules: [],
+            active: 0
         };
 
         this.setCourseId = this.setCourseId.bind(this);
@@ -19,10 +20,11 @@ export default class ModuleList
         this.deleteModule = this.deleteModule.bind(this);
         this.findAllModulesForCourse = this.findAllModulesForCourse.bind(this);
         this.setModules = this.setModules.bind(this);
+        this.setActive = this.setActive.bind(this);
         this.moduleService = ModuleService.instance;
     }
 
-    componentWillMount() {
+    componentDidlMount() {
         this.setCourseId(this.props.courseId);
         this.findAllModulesForCourse(this.props.courseId);
     }
@@ -34,6 +36,10 @@ export default class ModuleList
 
     setCourseId(courseId) {
         this.setState({courseId: courseId});
+    }
+
+    setActive(moduleId) {
+        this.setState({active: moduleId});
     }
 
     setModules(modules) {
@@ -71,14 +77,18 @@ export default class ModuleList
             });
     }
 
+
+
     renderListOfModules() {
         let deleteModule = this.deleteModule;
+        let setActive = this.setActive;
         let courseId = this.state.courseId;
+        let active = this.active;
         let modules = null;
         if (this.state){
             modules = this.state.modules.map(function (module) {
                 return <ModuleListItem
-                    courseId={courseId} module={module} key={module.id} delete={deleteModule}/>
+                    courseId={courseId} module={module} key={module.id} delete={deleteModule} active={active} setActive={setActive}/>
             });
         }
         return modules;
