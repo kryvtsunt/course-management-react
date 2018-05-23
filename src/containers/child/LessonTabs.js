@@ -101,12 +101,14 @@ export default class LessonTabs
     render() {
         return (
             <div className="container-fluid">
-                <ul className="nav nav-tabs ">
+                <ul className="nav nav-tabs">
                     {this.renderLessons()}
                     <li className="nav-item">
-                        <input className="form-control"
+                        <div className="container-fluid">
+                        <input className="form-control form-control-sm"
                                onChange={this.titleChanged}
                                placeholder="title"/>
+                        </div>
                     </li>
                     <li className="nav-item">
                         <i onClick={this.createLesson} className="btn fa fa-plus">

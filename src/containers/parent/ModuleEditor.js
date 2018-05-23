@@ -2,7 +2,7 @@ import React from 'react'
 import TopicPills from '../child/TopicPills'
 import LessonTabs from '../child/LessonTabs'
 import ModuleService from '../../services/ModuleService'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 
 export default class ModuleManager
@@ -11,7 +11,7 @@ export default class ModuleManager
         super(props);
         this.moduleService = ModuleService.instance;
         this.setCourseId = this.setCourseId.bind(this);
-        this.setModuleId = this.setCourseId.bind(this);
+        this.setModuleId = this.setModuleId.bind(this);
         this.findModuleById = this.findModuleById.bind(this);
         this.state = {
             module: '',
@@ -55,9 +55,7 @@ export default class ModuleManager
                 <h2>
                     {this.state.module.title}
                 </h2>
-                <LessonTabs courseId={this.props.match.params.courseId} moduleId={this.props.match.params.moduleId}/>
-                {/*Will not work if pass state*/}
-                <hr/>
+                <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId}/>
                 <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={TopicPills}/>
             </div>
             </Router>

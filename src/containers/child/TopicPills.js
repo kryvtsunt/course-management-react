@@ -25,17 +25,17 @@ export default class TopicPills
     }
 
     componentWillMount() {
-        // this.setCourseId(this.props.match.param.courseId);
-        // this.setModuleId(this.props.match.param.moduleId);
-        // this.setLessonId(this.props.match.param.lessonId);
-        //this.findAllTopics(this.props.courseId, this.props.moduleId, this.props.lessonId);
+        this.setCourseId(this.props.match.params.courseId);
+        this.setModuleId(this.props.match.params.moduleId);
+        this.setLessonId(this.props.match.params.lessonId);
+        this.findAllTopics(this.props.match.params.courseId, this.props.match.params.moduleId, this.props.match.params.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
-        this.setCourseId(newProps.match.param.courseId);
-        this.setModuleId(newProps.match.param.moduleId);
-        this.setLessonId(newProps.match.param.lessonId);
-        this.findAllTopics(newProps.match.param.courseId, newProps.match.param.moduleId, newProps.match.param.lessonId);
+        this.setCourseId(newProps.match.params.courseId);
+        this.setModuleId(newProps.match.params.moduleId);
+        this.setLessonId(newProps.match.params.lessonId);
+        // this.findAllTopics(newProps.match.params.courseId, newProps.match.params.moduleId, newProps.match.params.lessonId);
     }
 
 
@@ -74,7 +74,7 @@ export default class TopicPills
         this.topicService
             .createTopic(this.state.courseId, this.state.moduleId, this.state.lessonId, this.state.topic)
             .then(() => {
-                this.findAllModulesForCourse(this.state.courseId, this.state.moduleId, this.state.lessonId);
+                this.findAllTopics(this.state.courseId, this.state.moduleId, this.state.lessonId);
             });
     }
 
@@ -96,7 +96,7 @@ export default class TopicPills
         if (this.state) {
             topics = this.state.topics.map(function (topic) {
                 return <TopicPill
-                    courseId={courseId} moduleId={moduleId} lessonId={lessonId} topic={topic} key={module.id}/>
+                    courseId={courseId} moduleId={moduleId} lessonId={lessonId} topic={topic} key={topic.id}/>
             });
         }
         return topics;
@@ -105,8 +105,22 @@ export default class TopicPills
 
     render() {
         return (
-            <ul className="nav nav-pills navbar-dark">
-                {this.renderListOfTopics()}
-            </ul>);
+            <div className="container-fluid">
+                <ul className="nav nav-tabs">
+                    {this.renderListOfTopics()}
+                    <li className="nav-item">
+                        <div className="container-fluid">
+                            <input className="form-control form-control-sm"
+                                   onChange={this.titleChanged}
+                                   placeholder="title"/>
+                        </div>
+                    </li>
+                    <li className="nav-item">
+                        <i onClick={this.createTopic} className="btn fa fa-plus">
+                        </i>
+                    </li>
+                </ul>
+            </div>
+        )
     }
 }

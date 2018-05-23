@@ -49,9 +49,9 @@ export default class CourseEditor extends React.Component {
                                 </h2>
                             </span>
                             <span className="navbar-right">
-                                <Link className="text-white" to={`/courses`}>
+                                <a href='/courses'>
                                     <i className="btn text-white fa fa-2x fa-home"></i>
-                                </Link>
+                                </a>
                             </span>
                         </nav>
                     </div>
