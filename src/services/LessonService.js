@@ -36,7 +36,7 @@ export default class LessonService {
     }
 
     deleteLesson(lessonId) {
-        return fetch('http://localhost:8080/api/lesson/'+ lessonId,
+        return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId)+ '/' + lessonId,
             {
                 method: 'DELETE'
             }).then(function (response) {

@@ -43,8 +43,8 @@ export default class ModuleService {
             });
     }
 
-    deleteModule(moduleId) {
-        return fetch('http://localhost:8080/api/module/'+ moduleId,
+    deleteModule(courseId, moduleId) {
+        return fetch(MODULE_API_URL.replace('CID', courseId) + '/' + moduleId,
             {
                 method: 'DELETE'
             }).then(function (response) {

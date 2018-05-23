@@ -7,7 +7,7 @@ class CourseList extends React.Component {
         super();
         this.courseService = CourseService.instance;
         this.state = {
-            course: {title: ''},
+            newCourse: {title: ''},
             courses: []
         };
         this.titleChanged = this.titleChanged.bind(this);
@@ -19,25 +19,29 @@ class CourseList extends React.Component {
         this.findAllCourses();
     }
 
-
     findAllCourses() {
         this.courseService.findAllCourses()
             .then((courses) => {
                 this.setState({courses: courses});
-                console.log(courses);
             });
+    }
+
+    titleChanged(event) {
+        this.setState({
+            newCourse: {title: event.target.value}
+        });
+
     }
 
     createCourse() {
         this.courseService
-            .createCourse(this.state.course)
+            .createCourse(this.state.newCourse)
             .then(() => {
                 this.findAllCourses();
             });
     }
 
     deleteCourse(courseId) {
-        console.log('delete ' + courseId);
         this.courseService
             .deleteCourse(courseId)
             .then(() => {
@@ -58,12 +62,6 @@ class CourseList extends React.Component {
         return (courses);
     }
 
-    titleChanged(event) {
-        this.setState({
-            course: {title: event.target.value}
-        });
-
-    }
 
     render() {
         return (
@@ -94,6 +92,7 @@ class CourseList extends React.Component {
                         <tr>
                             <th>Title</th>
                             <th>Owned by</th>
+                            <th>Created</th>
                             <th>Last modified</th>
                         </tr>
 

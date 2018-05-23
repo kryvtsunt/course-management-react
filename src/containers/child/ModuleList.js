@@ -8,8 +8,8 @@ export default class ModuleList
     constructor(props) {
         super(props);
         this.state = {
+            newModule: {title: ''},
             courseId: '',
-            module: {title: ''},
             modules: []
         };
 
@@ -22,7 +22,7 @@ export default class ModuleList
 
     componentDidMount() {
         this.setCourseId(this.props.courseId);
-        //this.findAllModulesForCourse(this.props.courseId);
+        this.findAllModulesForCourse(this.props.courseId);
     }
 
     componentWillReceiveProps(newProps) {
@@ -30,19 +30,12 @@ export default class ModuleList
         this.findAllModulesForCourse(newProps.courseId);
     }
 
-
-    setModules(modules) {
-        this.setState({modules: modules})
-    }
-
     setCourseId(courseId) {
         this.setState({courseId: courseId});
     }
 
-
-    titleChanged(event) {
-        console.log(event.target.value);
-        this.setState({module: {title: event.target.value}});
+    setModules(modules) {
+        this.setState({modules: modules})
     }
 
     findAllModulesForCourse(courseId) {
@@ -54,19 +47,23 @@ export default class ModuleList
     }
 
 
+    titleChanged(event) {
+        console.log(event.target.value);
+        this.setState({newModule: {title: event.target.value}});
+    }
+
+
     createModule(event) {
-        console.log(this.state.module);
         this.moduleService
-            .createModule(this.state.courseId, this.state.module)
+            .createModule(this.state.courseId, this.state.newModule)
             .then(() => {
                 this.findAllModulesForCourse(this.state.courseId);
             });
     }
 
-    deleteModule(moduleId) {
-        console.log('delete ' + moduleId);
+    deleteModule(courseId, moduleId) {
         this.moduleService
-            .deleteModule(moduleId)
+            .deleteModule(courseId, moduleId)
             .then(() => {
                 this.findAllModulesForCourse(this.state.courseId);
             });

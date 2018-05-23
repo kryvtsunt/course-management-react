@@ -15,7 +15,7 @@ export default class ModuleListItem
                 </Link>
                 <span className="float-right">
                     <i className="btn btn-danger fa fa-times" onClick={() => {
-                        this.props.delete(this.props.module.id)
+                        this.props.delete(this.props.courseId, this.props.module.id)
                     }}>
                     </i>
                 </span>

@@ -10,45 +10,41 @@ export default class ModuleManager
     constructor(props) {
         super(props);
         this.moduleService = ModuleService.instance;
-        this.selectCourse = this.selectCourse.bind(this);
-        this.selectModule = this.selectCourse.bind(this);
+        this.setCourseId = this.setCourseId.bind(this);
+        this.setModuleId = this.setCourseId.bind(this);
         this.findModuleById = this.findModuleById.bind(this);
         this.state = {
             module: '',
             courseId: '',
             moduleId: '',
-            lessonId: ''
         };
     }
 
     componentDidMount() {
-        this.selectCourse(this.props.match.params.courseId);
-        this.selectModule(this.props.match.params.moduleId);
-        if (this.props.match.params.lessonId) {
-            this.selectModule(this.props.match.params.lessonId);
-        }
+        this.setCourseId(this.props.match.params.courseId);
+        this.setModuleId(this.props.match.params.moduleId);
         this.findModuleById(this.props.match.params.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
-        this.selectCourse(newProps.match.params.courseId);
-        this.selectModule(newProps.match.params.moduleId);
+        this.setCourseId(newProps.match.params.courseId);
+        this.setModuleId(newProps.match.params.moduleId);
         this.findModuleById(newProps.match.params.moduleId);
     }
 
-    selectModule(moduleId) {
+    setCourseId(courseId) {
+        this.setState({courseId: courseId});
+    }
+
+    setModuleId(moduleId) {
         this.setState({moduleId: moduleId});
     }
 
-    selectCourse(courseId) {
-        this.setState({courseId: courseId});
-    }
 
     findModuleById(moduleId) {
         this.moduleService.findModuleById(moduleId)
             .then((module) => {
                 this.setState({module: module});
-                //console.log(this.state.course)
             });
     }
 
@@ -60,6 +56,7 @@ export default class ModuleManager
                     {this.state.module.title}
                 </h2>
                 <LessonTabs courseId={this.props.match.params.courseId} moduleId={this.props.match.params.moduleId}/>
+                <hr/>
                 <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={TopicPills}/>
             </div>
             </Router>

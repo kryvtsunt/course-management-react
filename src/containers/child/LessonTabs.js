@@ -33,7 +33,6 @@ export default class LessonTabs
 
     }
 
-
     setCourseId(courseId) {
         this.setState({courseId: courseId});
     }
@@ -42,10 +41,8 @@ export default class LessonTabs
         this.setState({moduleId: moduleId});
     }
 
-
-    titleChanged(event) {
-        console.log(event.target.value);
-        this.setState({lesson: {title: event.target.value}});
+    setLessons(lessons) {
+        this.setState({lessons: lessons})
     }
 
     findAllLessons(courseId, moduleId) {
@@ -55,8 +52,11 @@ export default class LessonTabs
             });
     }
 
-    setLessons(lessons) {
-        this.setState({lessons: lessons})
+
+
+    titleChanged(event) {
+        console.log(event.target.value);
+        this.setState({lesson: {title: event.target.value}});
     }
 
 

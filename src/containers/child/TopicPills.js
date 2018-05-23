@@ -25,23 +25,19 @@ export default class TopicPills
     }
 
     componentDidMount() {
-        this.setCourseId(this.props.courseId);
-        this.setModuleId(this.props.moduleId);
-        this.setLessonId(this.props.lessonId);
+        this.setCourseId(this.props.match.param.courseId);
+        this.setModuleId(this.props.match.param.moduleId);
+        this.setLessonId(this.props.match.param.lessonId);
         this.findAllTopics(this.props.courseId, this.props.moduleId, this.props.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
-        this.setCourseId(newProps.courseId);
-        this.setModuleId(newProps.moduleId);
-        this.setLessonId(newProps.lessonId);
-        this.findAllTopics(newProps.courseId, newProps.moduleId, newProps.lessonId);
+        this.setCourseId(newProps.match.param.courseId);
+        this.setModuleId(newProps.match.param.moduleId);
+        this.setLessonId(newProps.match.param.lessonId);
+        this.findAllTopics(newProps.match.param.courseId, newProps.match.param.moduleId, newProps.match.param.lessonId);
     }
 
-
-    setTopics(topics) {
-        this.setState({topics: topics})
-    }
 
     setCourseId(courseId) {
         this.setState({courseId: courseId});
@@ -53,10 +49,8 @@ export default class TopicPills
         this.setState({lessonId: lessonId});
     }
 
-
-    titleChanged(event) {
-        console.log(event.target.value);
-        this.setState({topic: {title: event.target.value}});
+    setTopics(topics) {
+        this.setState({topics: topics})
     }
 
     findAllTopics(courseId, moduleId, lessonId) {
@@ -65,6 +59,12 @@ export default class TopicPills
             .then((topics) => {
                 this.setTopics(topics)
             });
+    }
+
+
+    titleChanged(event) {
+        console.log(event.target.value);
+        this.setState({topic: {title: event.target.value}});
     }
 
 
