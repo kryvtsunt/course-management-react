@@ -7,9 +7,9 @@ export default class TopicPills
     constructor(props) {
         super(props);
         this.state = {
-            courseId: undefined,
-            moduleId: undefined,
-            lessonId: undefined,
+            courseId: '',
+            moduleId: '',
+            lessonId: '',
             newTopic: {title: ''},
             topics: []
         };
@@ -31,6 +31,7 @@ export default class TopicPills
     }
 
     componentWillReceiveProps(newProps) {
+
         this.setCourseId(newProps.courseId);
         this.setModuleId(newProps.moduleId);
         this.setLessonId(newProps.lessonId);
@@ -55,7 +56,7 @@ export default class TopicPills
     }
 
     findAllTopics(courseId, moduleId, lessonId) {
-        if ((courseId !== undefined) && (moduleId !== undefined) && (lessonId !== undefined)) {
+        if ((courseId !== '') && (moduleId !== '') && (lessonId !== '')) {
             this.topicService
                 .findAllTopics(courseId, moduleId, lessonId)
                 .then((topics) => {

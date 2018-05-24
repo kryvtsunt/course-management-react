@@ -93,7 +93,7 @@ export default class ModuleList
         let deleteModule = this.deleteModule;
         let setActive = this.setActive;
         let courseId = this.state.courseId;
-        let active = this.active;
+        let active = this.state.active;
         let modules = null;
         if (this.state){
             modules = this.state.modules.map(function (module) {
