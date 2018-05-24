@@ -24,9 +24,8 @@ export default class ModuleList
         this.moduleService = ModuleService.instance;
     }
 
-    componentDidlMount() {
+    componentDidMount() {
         this.setCourseId(this.props.courseId);
-        this.findAllModulesForCourse(this.props.courseId);
     }
 
     componentWillReceiveProps(newProps) {
@@ -47,11 +46,13 @@ export default class ModuleList
     }
 
     findAllModulesForCourse(courseId) {
-        this.moduleService
-            .findAllModulesForCourse(courseId)
-            .then((modules) => {
-                this.setModules(modules)
-            });
+        if (courseId != '') {
+            this.moduleService
+                .findAllModulesForCourse(courseId)
+                .then((modules) => {
+                    this.setModules(modules)
+                });
+        }
     }
 
 

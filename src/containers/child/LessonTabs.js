@@ -22,15 +22,13 @@ export default class LessonTabs
         this.findAllLessons = this.findAllLessons.bind(this);
         this.renderLessons = this.renderLessons.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
-        // this.deleteLesson = this.deleteLesson.bind(this);
+        this.deleteLesson = this.deleteLesson.bind(this);
         this.lessonService = LessonService.instance;
     };
 
     componentDidMount() {
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
-        this.findAllLessons(this.props.courseId, this.props.moduleId);
-
     }
 
     componentWillReceiveProps(newProps) {
@@ -52,10 +50,12 @@ export default class LessonTabs
     }
 
     findAllLessons(courseId, moduleId) {
-        this.lessonService.findAllLessons(courseId, moduleId)
-            .then((lessons) => {
-                this.setLessons(lessons)
-            });
+        if ((courseId != '')&&(moduleId != '')) {
+            this.lessonService.findAllLessons(courseId, moduleId)
+                .then((lessons) => {
+                    this.setLessons(lessons)
+                });
+        }
     }
 
 
@@ -74,25 +74,24 @@ export default class LessonTabs
             });
     }
 
-    //
-    // deleteLesson(lessonId) {
-    //     console.log('delete ' + lessonId);
-    //     this.moduleService
-    //         .deleteModule(moduleId)
-    //         .then(() => {
-    //             this.findAllModulesForCourse(this.state.courseId);
-    //         });
-    // }
+
+    deleteLesson(courseId, moduleId, lessonId) {
+        this.lessonService
+            .deleteLesson(courseId, moduleId, lessonId)
+            .then(() => {
+                this.findAllLessons(courseId, moduleId);
+            });
+    }
 
     renderLessons() {
-        //let deleteLesson = this.deleteLesson;
+        let deleteLesson = this.deleteLesson;
         let courseId = this.state.courseId;
         let moduleId = this.state.moduleId;
         let lessons = null;
         if (this.state) {
             lessons = this.state.lessons.map(function (lesson) {
                 return <LessonTab
-                    moduleId={moduleId} courseId={courseId} lesson={lesson} key={lesson.id}/>
+                    moduleId={moduleId} courseId={courseId} lesson={lesson} key={lesson.id} delete={deleteLesson}/>
             });
         }
         return lessons;

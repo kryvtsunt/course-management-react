@@ -1,4 +1,4 @@
-const Lesson_API_URL =
+const Topic_API_URL =
     'http://localhost:8080/api/course/CID/module/MID/lesson/LID/topic';
 let _singleton = Symbol();
 
@@ -16,7 +16,7 @@ export default class TopicService {
 
 
     findAllTopics(courseId, moduleId, lessonId) {
-        return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId).replace('LID', lessonId))
+        return fetch(Topic_API_URL.replace('CID', courseId).replace('MID', moduleId).replace('LID', lessonId))
             .then(function (response) {
                 return response.json();
             })
@@ -24,7 +24,7 @@ export default class TopicService {
 
 
     createTopic(courseId, moduleId, lessonId, topic) {
-        return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId).replace('LID', lessonId),
+        return fetch(Topic_API_URL.replace('CID', courseId).replace('MID', moduleId).replace('LID', lessonId),
             {
                 body: JSON.stringify(topic),
                 headers: {'Content-Type': 'application/json'},
@@ -35,12 +35,12 @@ export default class TopicService {
             })
     }
 
-    // deleteLesson(lessonId) {
-    //     return fetch('http://localhost:8080/api/lesson/'+ lessonId,
-    //         {
-    //             method: 'DELETE'
-    //         }).then(function (response) {
-    //         return response;
-    //     })
-    // }
+    deleteTopic(courseId, moduleId, lessonId, topicId) {
+        return fetch(Topic_API_URL.replace('CID', courseId).replace('MID', moduleId).replace('LID', lessonId) + '/' + topicId,
+            {
+                method: 'DELETE'
+            }).then(function (response) {
+            return response;
+        })
+    }
 }

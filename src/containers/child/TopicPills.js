@@ -19,23 +19,22 @@ export default class TopicPills
         this.setLessonId = this.setLessonId.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.createTopic = this.createTopic.bind(this);
-        // this.deleteTopic = this.deleteTopic.bind(this);
+        this.deleteTopic = this.deleteTopic.bind(this);
         this.findAllTopics = this.findAllTopics.bind(this);
         this.topicService = TopicService.instance;
     }
 
     componentDidMount() {
-        this.setCourseId(this.props.match.params.courseId);
-        this.setModuleId(this.props.match.params.moduleId);
-        this.setLessonId(this.props.match.params.lessonId);
-        this.findAllTopics(this.props.match.params.courseId, this.props.match.params.moduleId, this.props.match.params.lessonId);
+        this.setCourseId(this.props.courseId);
+        this.setModuleId(this.props.moduleId);
+        this.setLessonId(this.props.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
-        this.setCourseId(newProps.match.params.courseId);
-        this.setModuleId(newProps.match.params.moduleId);
-        this.setLessonId(newProps.match.params.lessonId);
-        this.findAllTopics(newProps.match.params.courseId, newProps.match.params.moduleId, newProps.match.params.lessonId);
+        this.setCourseId(newProps.courseId);
+        this.setModuleId(newProps.moduleId);
+        this.setLessonId(newProps.lessonId);
+        this.findAllTopics(newProps.courseId, newProps.moduleId, newProps.lessonId);
     }
 
 
@@ -56,11 +55,13 @@ export default class TopicPills
     }
 
     findAllTopics(courseId, moduleId, lessonId) {
-        this.topicService
-            .findAllTopics(courseId, moduleId, lessonId)
-            .then((topics) => {
-                this.setTopics(topics)
-            });
+        if ((courseId != '')&&(moduleId != '')&&(lessonId != '')) {
+            this.topicService
+                .findAllTopics(courseId, moduleId, lessonId)
+                .then((topics) => {
+                    this.setTopics(topics)
+                });
+        }
     }
 
 
@@ -78,17 +79,16 @@ export default class TopicPills
             });
     }
 
-    // deleteModule(moduleId) {
-    //     console.log('delete ' + moduleId);
-    //     this.moduleService
-    //         .deleteModule(moduleId)
-    //         .then(() => {
-    //             this.findAllModulesForCourse(this.state.courseId);
-    //         });
-    // }
+    deleteTopic(courseId, moduleId, lessonId, topicId) {
+        this.topicService
+            .deleteTopic(courseId, moduleId, lessonId, topicId)
+            .then(() => {
+                this.findAllTopics(courseId, moduleId, topicId);
+            });
+    }
 
     renderListOfTopics() {
-        //let deleteModule = this.deleteModule;
+        let deleteTopic = this.deleteTopic;
         let courseId = this.state.courseId;
         let moduleId = this.state.moduleId;
         let lessonId = this.state.lessonId;
@@ -96,7 +96,7 @@ export default class TopicPills
         if (this.state) {
             topics = this.state.topics.map(function (topic) {
                 return <TopicPill
-                    courseId={courseId} moduleId={moduleId} lessonId={lessonId} topic={topic} key={topic.id}/>
+                    courseId={courseId} moduleId={moduleId} lessonId={lessonId} topic={topic} key={topic.id} delete={deleteTopic}/>
             });
         }
         return topics;

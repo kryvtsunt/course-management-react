@@ -2,6 +2,7 @@ import React from 'react'
 import TopicPills from '../child/TopicPills'
 import LessonTabs from '../child/LessonTabs'
 import ModuleService from '../../services/ModuleService'
+import LessonEditor from './LessonEditor'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 
@@ -23,7 +24,7 @@ export default class ModuleManager
     componentDidMount() {
         this.setCourseId(this.props.match.params.courseId);
         this.setModuleId(this.props.match.params.moduleId);
-        this.findModuleById(this.props.match.params.moduleId);
+        //this.findModuleById(this.props.match.params.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
@@ -57,7 +58,7 @@ export default class ModuleManager
                 </h2>
                 <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId}/>
                 <br/>
-                <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={TopicPills}/>
+                <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
             </div>
             </Router>
 

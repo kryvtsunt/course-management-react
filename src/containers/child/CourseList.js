@@ -19,6 +19,10 @@ class CourseList extends React.Component {
         this.findAllCourses();
     }
 
+    componentWillReceiveProps() {
+        // this.findAllCourses();
+    }
+
     findAllCourses() {
         this.courseService.findAllCourses()
             .then((courses) => {

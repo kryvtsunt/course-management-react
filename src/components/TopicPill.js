@@ -12,10 +12,19 @@ export default class TopicPill
         return (
 
             <li className="nav-item ">
-                <a className="nav-link bg-dark active"
-                   href="#">
-                    {this.props.topic.title}
-                </a></li>
+                <div className="list-group-item">
+                    <a className="nav-link bg-dark active"
+                       href="#">
+                        {this.props.topic.title}
+                    </a>
+                    <span className="float-right">
+                    <i className="btn fa fa-times" onClick={() => {
+                        this.props.delete(this.props.courseId, this.props.moduleId, this.props.lesson.id)
+                    }}>
+                    </i>
+                </span>
+                </div>
+            </li>
 
         )
             ;
