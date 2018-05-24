@@ -1,5 +1,5 @@
 const Topic_API_URL =
-    'http://localhost:8080/api/course/CID/module/MID/lesson/LID/topic';
+    'http://tk-course-management.herokuapp.com/api/course/CID/module/MID/lesson/LID/topic';
 let _singleton = Symbol();
 
 export default class TopicService {
