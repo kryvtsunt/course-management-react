@@ -47,7 +47,8 @@ export default class ModuleManager
     render() {
         return (
                 <div className="container-fluid">
-                    <TopicPills courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>
+                    {/*Uncoment line below to access topic pills*/}
+                    {/*<TopicPills courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>*/}
                 </div>
         );
     }

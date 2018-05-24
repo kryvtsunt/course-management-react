@@ -54,8 +54,6 @@ export default class ModuleService {
         return fetch(MODULE_API_URL.replace('CID', courseId) + '/' + moduleId,
             {
                 method: 'DELETE'
-            }).then(function (response) {
-            return response;
-        })
+            })
     }
 }

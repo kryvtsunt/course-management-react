@@ -2,7 +2,7 @@ import React from 'react'
 import ModuleList from '../child/ModuleList'
 import ModuleEditor from './ModuleEditor'
 import CourseService from '../../services/CourseSerice'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 export default class CourseEditor extends React.Component {
     constructor(props) {
