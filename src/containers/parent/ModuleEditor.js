@@ -51,14 +51,15 @@ export default class ModuleManager
     render() {
         return (
             <Router>
-            <div className="container-fluid">
-                <h2>
-                    {this.state.module.title}
-                </h2>
-                <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId}/>
-                <br/>
-                <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
-            </div>
+                <div className="container-fluid">
+                    <br/>
+                    <h2 className="text-center">
+                        {this.state.module.title}
+                    </h2>
+                    <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId}/>
+                    <br/>
+                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
+                </div>
             </Router>
 
         );

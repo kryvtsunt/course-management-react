@@ -15,8 +15,15 @@ export default class LessonService {
     }
 
 
-    findAllLessons(courseId, moduleId) {
+    findAllLessonsForModule(courseId, moduleId) {
         return fetch(Lesson_API_URL.replace('CID', courseId).replace('MID', moduleId))
+            .then(function (response) {
+                return response.json();
+            })
+    }
+
+    findAllLessons() {
+        return fetch('http://localhost:8080/api/lesson')
             .then(function (response) {
                 return response.json();
             })

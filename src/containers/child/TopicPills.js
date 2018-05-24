@@ -7,9 +7,9 @@ export default class TopicPills
     constructor(props) {
         super(props);
         this.state = {
-            courseId: '',
-            moduleId: '',
-            lessonId: '',
+            courseId: undefined,
+            moduleId: undefined,
+            lessonId: undefined,
             newTopic: {title: ''},
             topics: []
         };
@@ -55,12 +55,14 @@ export default class TopicPills
     }
 
     findAllTopics(courseId, moduleId, lessonId) {
-        if ((courseId !== '')&&(moduleId !== '')&&(lessonId !== '')) {
+        if ((courseId !== undefined) && (moduleId !== undefined) && (lessonId !== undefined)) {
             this.topicService
                 .findAllTopics(courseId, moduleId, lessonId)
                 .then((topics) => {
                     this.setTopics(topics)
                 });
+        } else {
+            this.setTopics([])
         }
     }
 
@@ -99,7 +101,8 @@ export default class TopicPills
         if (this.state) {
             topics = this.state.topics.map(function (topic) {
                 return <TopicPill
-                    courseId={courseId} moduleId={moduleId} lessonId={lessonId} topic={topic} key={topic.id} delete={deleteTopic}/>
+                    courseId={courseId} moduleId={moduleId} lessonId={lessonId} topic={topic} key={topic.id}
+                    delete={deleteTopic}/>
             });
         }
         return topics;
@@ -109,21 +112,26 @@ export default class TopicPills
     render() {
         return (
             <div className="container-fluid">
-                <ul className="nav nav-pills">
-                    {this.renderListOfTopics()}
-                    <li className="nav-item">
-                        <div className="container-fluid">
-                            <input className="form-control form-control-sm"
-                                   onChange={this.titleChanged}
-                                   placeholder="New Topic"/>
-                        </div>
-                    </li>
-                    <li className="nav-item">
-                        <i onClick={this.createTopic} className="btn fa fa-plus">
-                        </i>
-                    </li>
-                </ul>
+                <div className="row">
+                    <div className="col-9">
+                        <ul className="nav nav-pills">
+                            {this.renderListOfTopics()}
+                        </ul>
+                    </div>
+
+                    <div className="col-3">
+                        <nav className="nav">
+                            <form className="form-inline form-group">
+                                <input className="form-control form-control-sm"
+                                       onChange={this.titleChanged}
+                                       placeholder="New Topic"/>
+                                <i onClick={this.createTopic} className="btn fa fa-plus"></i>
+                            </form>
+                        </nav>
+                    </div>
+                </div>
             </div>
         )
     }
 }
+

@@ -1,7 +1,7 @@
 import React from 'react'
 import ModuleListItem from '../../components/ModuleListItem'
 import ModuleService from '../../services/ModuleService'
-
+import Modal from '../../components/Modal'
 
 export default class ModuleList
     extends React.Component {
@@ -11,7 +11,8 @@ export default class ModuleList
             newModule: {title: ''},
             courseId: '',
             modules: [],
-            active: 0
+            active: 0,
+            isOpen: false
         };
 
         this.setCourseId = this.setCourseId.bind(this);
@@ -22,6 +23,12 @@ export default class ModuleList
         this.setModules = this.setModules.bind(this);
         this.setActive = this.setActive.bind(this);
         this.moduleService = ModuleService.instance;
+    }
+
+    toggleModal = () => {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
     }
 
     componentDidMount() {
@@ -113,7 +120,17 @@ export default class ModuleList
                     <button onClick={this.createModule} className="btn btn-dark btn-block">
                         <i className="fa fa-plus"></i>
                     </button>
+                    <button onClick={this.toggleModal}>
+                        Open the modal
+                    </button>
+                    <Modal show={this.state.isOpen}
+                           onClose={this.toggleModal}>
+                        Here's some content for the modal
+                    </Modal>
                 </div>
+
+
+
 
         );
     }

@@ -18,7 +18,7 @@ export default class LessonTabs
         this.setModuleId = this.setModuleId.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.createLesson = this.createLesson.bind(this);
-        this.findAllLessons = this.findAllLessons.bind(this);
+        this.findAllLessonsForModule = this.findAllLessonsForModule.bind(this);
         this.renderLessons = this.renderLessons.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
@@ -33,7 +33,7 @@ export default class LessonTabs
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.courseId);
         this.setModuleId(newProps.moduleId);
-        this.findAllLessons(newProps.courseId, newProps.moduleId);
+        this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
     }
 
     setCourseId(courseId) {
@@ -48,15 +48,14 @@ export default class LessonTabs
         this.setState({lessons: lessons})
     }
 
-    findAllLessons(courseId, moduleId) {
-        if ((courseId !== '')&&(moduleId !== '')) {
-            this.lessonService.findAllLessons(courseId, moduleId)
+    findAllLessonsForModule(courseId, moduleId) {
+        if ((courseId !== '') && (moduleId !== '')) {
+            this.lessonService.findAllLessonsForModule(courseId, moduleId)
                 .then((lessons) => {
                     this.setLessons(lessons)
                 });
         }
     }
-
 
 
     titleChanged(event) {
@@ -73,7 +72,7 @@ export default class LessonTabs
         this.lessonService
             .createLesson(this.state.courseId, this.state.moduleId, addLesson)
             .then(() => {
-                this.findAllLessons(this.state.courseId, this.state.moduleId, this.state.lesson);
+                this.findAllLessonsForModule(this.state.courseId, this.state.moduleId, this.state.lesson);
             });
     }
 
@@ -82,7 +81,7 @@ export default class LessonTabs
         this.lessonService
             .deleteLesson(courseId, moduleId, lessonId)
             .then(() => {
-                this.findAllLessons(courseId, moduleId);
+                this.findAllLessonsForModule(courseId, moduleId);
             });
     }
 
@@ -103,20 +102,23 @@ export default class LessonTabs
     render() {
         return (
             <div className="container-fluid">
-                <ul className="nav nav-tabs">
-                    {this.renderLessons()}
-                    <li className="nav-item">
-                        <div className="container-fluid">
-                        <input className="form-control form-control-sm"
-                               onChange={this.titleChanged}
-                               placeholder="New Lesson"/>
-                        </div>
-                    </li>
-                    <li className="nav-item">
-                        <i onClick={this.createLesson} className="btn fa fa-plus">
-                        </i>
-                    </li>
-                </ul>
+                <div className="row">
+                    <div className="col-9">
+                        <ul className="nav nav-tabs">
+                            {this.renderLessons()}
+                        </ul>
+                    </div>
+                    <div className="col-3">
+                        <nav className="nav">
+                            <form className="form-inline form-group">
+                                <input className="form-control"
+                                       onChange={this.titleChanged}
+                                       placeholder="New Lesson"/>
+                                <i onClick={this.createLesson} className="btn fa fa-plus"></i>
+                            </form>
+                        </nav>
+                    </div>
+                </div>
             </div>
 
         );

@@ -11,17 +11,18 @@ export default class LessonTabb
     render() {
         return (
             <li className="nav-item">
-
-                    <Link className="nav-link active"
+                <div className="btn-group btn-block">
+                    <Link className="nav-link bg-dark text-white active"
                           to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
                         {this.props.lesson.title}
                     </Link>
-                    {/*<span className="float-right">*/}
-                    {/*<i className="btn fa fa-times" onClick={() => {*/}
-                        {/*this.props.delete(this.props.courseId, this.props.moduleId, this.props.lesson.id)*/}
-                    {/*}}>*/}
-                    {/*</i>*/}
-                {/*</span>*/}
+                    <span className="float-right">
+                    <i className="btn fa fa-times" onClick={() => {
+                        this.props.delete(this.props.courseId, this.props.moduleId, this.props.lesson.id)
+                    }}>
+                    </i>
+                </span>
+                </div>
 
             </li>
 
