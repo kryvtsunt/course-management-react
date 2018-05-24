@@ -17,6 +17,7 @@ export default class TopicPills
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.setLessonId = this.setLessonId.bind(this);
+        this.setTopicId = this.setTopicId.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.createTopic = this.createTopic.bind(this);
         this.deleteTopic = this.deleteTopic.bind(this);
@@ -51,12 +52,17 @@ export default class TopicPills
         this.setState({lessonId: lessonId});
     }
 
+    setTopicId(topicId) {
+        this.setState({topicId: topicId});
+    }
+
+
     setTopics(topics) {
         this.setState({topics: topics})
     }
 
     findAllTopics(courseId, moduleId, lessonId) {
-        if ((courseId !== '') && (moduleId !== '') && (lessonId !== '')) {
+        if ((courseId !== undefined) && (moduleId !== undefined) && (lessonId !== undefined)) {
             this.topicService
                 .findAllTopics(courseId, moduleId, lessonId)
                 .then((topics) => {

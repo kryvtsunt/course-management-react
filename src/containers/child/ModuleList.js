@@ -12,7 +12,7 @@ export default class ModuleList
         super(props);
         this.state = {
             newModule: {title: ''},
-            courseId: '',
+            courseId: undefined,
             modules: [],
             active: undefined
         };
@@ -53,7 +53,7 @@ export default class ModuleList
     }
 
     findAllModulesForCourse(courseId) {
-        if (courseId !== undefined) {
+        if (courseId != 'undefined') {
             this.moduleService
                 .findAllModulesForCourse(courseId)
                 .then((modules) => {

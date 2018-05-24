@@ -13,7 +13,7 @@ export default class LessonTabb
             <li className="nav-item">
                 <div className="btn-group btn-block">
                     <Link className="nav-link bg-dark text-white active"
-                          to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+                          to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}/topic/${undefined}`}>
                         {this.props.lesson.title}
                     </Link>
                     <span className="float-right">

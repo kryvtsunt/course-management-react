@@ -46,6 +46,7 @@ export default class LessonTabs
     setModuleId(moduleId) {
         this.setState({moduleId: moduleId});
     }
+
     setLessonId(lessonId) {
         this.setState({lessonId: lessonId});
     }
@@ -55,14 +56,13 @@ export default class LessonTabs
     }
 
     findAllLessonsForModule(courseId, moduleId) {
-        if ((courseId !== undefined) && (moduleId !== undefined)) {
+        if ((courseId == 'undefined') || (moduleId == 'undefined')) {
+            this.setLessons([]);
+        } else {
             this.lessonService.findAllLessonsForModule(courseId, moduleId)
                 .then((lessons) => {
                     this.setLessons(lessons)
                 });
-        }
-        else {
-            this.setLessons([])
         }
     }
 

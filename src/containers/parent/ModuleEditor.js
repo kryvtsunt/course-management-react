@@ -32,7 +32,7 @@ export default class ModuleManager
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.match.params.courseId);
         this.setModuleId(newProps.match.params.moduleId);
-        this.setLessonId(this.props.match.params.lessonId);
+        this.setLessonId(newProps.match.params.lessonId);
         this.findModuleById(newProps.match.params.moduleId);
     }
 
@@ -49,11 +49,13 @@ export default class ModuleManager
 
 
     findModuleById(moduleId) {
+        if (moduleId != 'undefined')
         this.moduleService.findModuleById(moduleId)
             .then((module) => {
                 this.setState({module: module});
             });
     }
+
     getTitle(){
         if (this.state.module){
             return this.state.module.title;
@@ -70,7 +72,7 @@ export default class ModuleManager
                     </h2>
                     <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>
                     <br/>
-                    {/*<Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>*/}
+                    {/*<Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId" component={LessonEditor}/>*/}
                 </div>
             </Router>
 

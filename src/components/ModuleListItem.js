@@ -54,7 +54,7 @@ export default class ModuleListItem
                             this.props.setActive(this.props.module.id)
                         }}
 
-                        to={`/course/${this.props.courseId}/module/${this.props.module.id}/lesson/${undefined}`}>
+                        to={`/course/${this.props.courseId}/module/${this.props.module.id}/lesson/${undefined}/topic/${undefined}`}>
                         {this.props.module.title}
                     </Link>
                     <span className="float-right">
