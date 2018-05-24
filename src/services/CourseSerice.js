@@ -1,5 +1,5 @@
 const COURSE_API_URL =
-    'http://tk-course-management.herokuapp.com/api/course';
+    'http://tk-course-management-react/api/course';
 
 let _singleton = Symbol();
 
