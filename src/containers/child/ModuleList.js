@@ -53,12 +53,15 @@ export default class ModuleList
     }
 
     findAllModulesForCourse(courseId) {
-        if (courseId !== '') {
+        if (courseId !== undefined) {
             this.moduleService
                 .findAllModulesForCourse(courseId)
                 .then((modules) => {
                     this.setModules(modules)
                 });
+        }
+        else {
+            this.setModules([])
         }
     }
 

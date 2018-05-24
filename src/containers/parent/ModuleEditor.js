@@ -12,23 +12,27 @@ export default class ModuleManager
         this.moduleService = ModuleService.instance;
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
+        this.setLessonId = this.setLessonId.bind(this);
         this.findModuleById = this.findModuleById.bind(this);
+        this.getTitle = this.getTitle.bind(this);
         this.state = {
-            module: '',
-            courseId: '',
-            moduleId: '',
+            module: undefined,
+            courseId: undefined,
+            moduleId: undefined,
+            lessonId: undefined
         };
     }
 
     componentDidMount() {
         this.setCourseId(this.props.match.params.courseId);
         this.setModuleId(this.props.match.params.moduleId);
-        this.findModuleById(this.props.match.params.moduleId);
+        this.setLessonId(this.props.match.params.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.match.params.courseId);
         this.setModuleId(newProps.match.params.moduleId);
+        this.setLessonId(this.props.match.params.lessonId);
         this.findModuleById(newProps.match.params.moduleId);
     }
 
@@ -39,6 +43,9 @@ export default class ModuleManager
     setModuleId(moduleId) {
         this.setState({moduleId: moduleId});
     }
+    setLessonId(lessonId) {
+        this.setState({lessonId: lessonId});
+    }
 
 
     findModuleById(moduleId) {
@@ -47,6 +54,11 @@ export default class ModuleManager
                 this.setState({module: module});
             });
     }
+    getTitle(){
+        if (this.state.module){
+            return this.state.module.title;
+        }
+    }
 
     render() {
         return (
@@ -54,11 +66,11 @@ export default class ModuleManager
                 <div className="container-fluid">
                     <br/>
                     <h2 className="text-center">
-                        {this.state.module.title}
+                        {this.getTitle()}
                     </h2>
-                    <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId}/>
+                    <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>
                     <br/>
-                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
+                    {/*<Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>*/}
                 </div>
             </Router>
 

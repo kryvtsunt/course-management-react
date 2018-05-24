@@ -7,9 +7,9 @@ export default class ModuleManager
     constructor(props) {
         super(props);
         this.state = {
-            courseId: '',
-            moduleId: '',
-            lessonId: '',
+            courseId: undefined,
+            moduleId: undefined,
+            lessonId: undefined,
         };
 
         this.setCourseId = this.setCourseId.bind(this);
@@ -48,7 +48,7 @@ export default class ModuleManager
         return (
                 <div className="container-fluid">
                     {/*Uncoment line below to access topic pills*/}
-                    {/*<TopicPills courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>*/}
+                    <TopicPills courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>
                 </div>
         );
     }

@@ -8,14 +8,15 @@ export default class LessonTabs
         super(props);
 
         this.state = {
-            courseId: '',
-            moduleId: '',
+            courseId: undefined,
+            moduleId: undefined,
             newLesson: {title: ''},
             lessons: []
         };
 
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
+        this.setLessonId = this.setLessonId.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.createLesson = this.createLesson.bind(this);
         this.findAllLessonsForModule = this.findAllLessonsForModule.bind(this);
@@ -28,11 +29,13 @@ export default class LessonTabs
     componentDidMount() {
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
+        this.setLessonId(this.props.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.courseId);
         this.setModuleId(newProps.moduleId);
+        this.setLessonId(newProps.lessonId);
         this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
     }
 
@@ -43,17 +46,23 @@ export default class LessonTabs
     setModuleId(moduleId) {
         this.setState({moduleId: moduleId});
     }
+    setLessonId(lessonId) {
+        this.setState({lessonId: lessonId});
+    }
 
     setLessons(lessons) {
         this.setState({lessons: lessons})
     }
 
     findAllLessonsForModule(courseId, moduleId) {
-        if ((courseId !== '') && (moduleId !== '')) {
+        if ((courseId !== undefined) && (moduleId !== undefined)) {
             this.lessonService.findAllLessonsForModule(courseId, moduleId)
                 .then((lessons) => {
                     this.setLessons(lessons)
                 });
+        }
+        else {
+            this.setLessons([])
         }
     }
 

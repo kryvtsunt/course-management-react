@@ -68,7 +68,7 @@ export default class CourseEditor extends React.Component {
                             <ModuleList courseId={this.state.courseId} moduleId={this.state.moduleId}/>
                         </div>
                         <div className="col-8">
-                            <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
+                            <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={ModuleEditor}/>
                         </div>
                     </div>
 
