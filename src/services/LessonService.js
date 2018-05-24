@@ -1,5 +1,5 @@
 const Lesson_API_URL =
-    'http://tk-course-management-react/api/course/CID/module/MID/lesson';
+    'https://tk-course-management-react/api/course/CID/module/MID/lesson';
 let _singleton = Symbol();
 
 export default class LessonService {
@@ -23,7 +23,7 @@ export default class LessonService {
     }
 
     findAllLessons() {
-        return fetch('http://tk-course-management-react.herokuapp.com/api/lesson')
+        return fetch('https://tk-course-management-react.herokuapp.com/api/lesson')
             .then(function (response) {
                 return response.json();
             })
