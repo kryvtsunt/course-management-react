@@ -14,7 +14,7 @@ export default class ModuleList
             newModule: {title: ''},
             courseId: '',
             modules: [],
-            active: 0,
+            active: undefined
         };
 
         this.setCourseId = this.setCourseId.bind(this);
@@ -31,10 +31,12 @@ export default class ModuleList
 
     componentDidMount() {
         this.setCourseId(this.props.courseId);
+        this.setActive(this.props.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.courseId);
+        this.setActive(newProps.moduleId);
         this.findAllModulesForCourse(newProps.courseId);
     }
 

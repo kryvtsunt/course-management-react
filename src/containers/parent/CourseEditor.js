@@ -9,26 +9,34 @@ export default class CourseEditor extends React.Component {
         super(props);
         this.courseService = CourseService.instance;
         this.setCourseId = this.setCourseId.bind(this);
+        this.setModuleId = this.setModuleId.bind(this);
         this.findCourseById = this.findCourseById.bind(this);
         this.state = {
             course: '',
-            courseId: '',
+            courseId: undefined,
+            moduleId: undefined
         };
     }
 
     componentDidMount() {
         this.setCourseId(this.props.match.params.courseId);
+        this.setModuleId(this.props.match.params.moduleId);
         this.findCourseById(this.props.match.params.courseId);
     }
 
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.match.params.courseId);
+        this.setModuleId(newProps.match.params.moduleId);
         this.findCourseById(newProps.match.params.courseId);
     }
 
     setCourseId(courseId) {
         this.setState({courseId: courseId});
     }
+    setModuleId(moduleId) {
+        this.setState({moduleId: moduleId});
+    }
+
 
     findCourseById(courseId) {
         this.courseService.findCourseById(courseId)
@@ -57,7 +65,7 @@ export default class CourseEditor extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col-4">
-                            <ModuleList courseId={this.state.courseId}/>
+                            <ModuleList courseId={this.state.courseId} moduleId={this.state.moduleId}/>
                         </div>
                         <div className="col-8">
                             <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
