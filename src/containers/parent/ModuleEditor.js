@@ -1,5 +1,4 @@
 import React from 'react'
-import TopicPills from '../child/TopicPills'
 import LessonTabs from '../child/LessonTabs'
 import ModuleService from '../../services/ModuleService'
 import LessonEditor from './LessonEditor'
@@ -24,7 +23,7 @@ export default class ModuleManager
     componentDidMount() {
         this.setCourseId(this.props.match.params.courseId);
         this.setModuleId(this.props.match.params.moduleId);
-        //this.findModuleById(this.props.match.params.moduleId);
+        this.findModuleById(this.props.match.params.moduleId);
     }
 
     componentWillReceiveProps(newProps) {

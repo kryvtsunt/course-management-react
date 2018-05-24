@@ -1,5 +1,4 @@
 import React from 'react'
-import TopicPills from './TopicPills'
 import LessonTab from '../../components/LessonTabb'
 import LessonService from '../../services/LessonService'
 
@@ -11,7 +10,7 @@ export default class LessonTabs
         this.state = {
             courseId: '',
             moduleId: '',
-            lesson: {title: ''},
+            newLesson: {title: ''},
             lessons: []
         };
 
@@ -50,7 +49,7 @@ export default class LessonTabs
     }
 
     findAllLessons(courseId, moduleId) {
-        if ((courseId != '')&&(moduleId != '')) {
+        if ((courseId !== '')&&(moduleId !== '')) {
             this.lessonService.findAllLessons(courseId, moduleId)
                 .then((lessons) => {
                     this.setLessons(lessons)
@@ -62,13 +61,17 @@ export default class LessonTabs
 
     titleChanged(event) {
         console.log(event.target.value);
-        this.setState({lesson: {title: event.target.value}});
+        this.setState({newLesson: {title: event.target.value}});
     }
 
 
     createLesson(event) {
+        let addLesson = {title: 'New Lesson'};
+        if (this.state.newLesson.title !== '') {
+            addLesson = this.state.newLesson;
+        }
         this.lessonService
-            .createLesson(this.state.courseId, this.state.moduleId, this.state.lesson)
+            .createLesson(this.state.courseId, this.state.moduleId, addLesson)
             .then(() => {
                 this.findAllLessons(this.state.courseId, this.state.moduleId, this.state.lesson);
             });
@@ -106,7 +109,7 @@ export default class LessonTabs
                         <div className="container-fluid">
                         <input className="form-control form-control-sm"
                                onChange={this.titleChanged}
-                               placeholder="title"/>
+                               placeholder="New Lesson"/>
                         </div>
                     </li>
                     <li className="nav-item">

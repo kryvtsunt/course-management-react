@@ -1,9 +1,5 @@
 import React from 'react'
 import TopicPills from '../child/TopicPills'
-import LessonTabs from '../child/LessonTabs'
-import ModuleService from '../../services/ModuleService'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
-import TopicPill from "../../components/TopicPill";
 
 
 export default class ModuleManager

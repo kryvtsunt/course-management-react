@@ -18,7 +18,7 @@ export default class CourseEditor extends React.Component {
 
     componentDidMount() {
         this.setCourseId(this.props.match.params.courseId);
-        //this.findCourseById(this.props.match.params.courseId);
+        this.findCourseById(this.props.match.params.courseId);
     }
 
     componentWillReceiveProps(newProps) {

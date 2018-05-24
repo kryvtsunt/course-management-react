@@ -46,7 +46,7 @@ export default class ModuleList
     }
 
     findAllModulesForCourse(courseId) {
-        if (courseId != '') {
+        if (courseId !== '') {
             this.moduleService
                 .findAllModulesForCourse(courseId)
                 .then((modules) => {
@@ -57,14 +57,18 @@ export default class ModuleList
 
 
     titleChanged(event) {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         this.setState({newModule: {title: event.target.value}});
     }
 
 
     createModule(event) {
+        let addModule = {title: 'New Module'};
+        if (this.state.newModule.title !== '') {
+            addModule = this.state.newModule;
+        }
         this.moduleService
-            .createModule(this.state.courseId, this.state.newModule)
+            .createModule(this.state.courseId, addModule)
             .then(() => {
                 this.findAllModulesForCourse(this.state.courseId);
             });
@@ -105,7 +109,7 @@ export default class ModuleList
                     </ul>
                     <input className="form-control"
                            onChange={this.titleChanged}
-                           placeholder="title"/>
+                           placeholder="New Module"/>
                     <button onClick={this.createModule} className="btn btn-dark btn-block">
                         <i className="fa fa-plus"></i>
                     </button>

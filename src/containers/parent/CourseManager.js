@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import CardDeck from '../child/CardDeck'
 import CourseEditor from './CourseEditor'
 import CourseList from '../child/CourseList'
 import {BrowserRouter as Router, Route} from 'react-router-dom'

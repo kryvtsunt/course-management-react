@@ -10,7 +10,7 @@ export default class TopicPills
             courseId: '',
             moduleId: '',
             lessonId: '',
-            topic: {title: ''},
+            newTopic: {title: ''},
             topics: []
         };
 
@@ -55,7 +55,7 @@ export default class TopicPills
     }
 
     findAllTopics(courseId, moduleId, lessonId) {
-        if ((courseId != '')&&(moduleId != '')&&(lessonId != '')) {
+        if ((courseId !== '')&&(moduleId !== '')&&(lessonId !== '')) {
             this.topicService
                 .findAllTopics(courseId, moduleId, lessonId)
                 .then((topics) => {
@@ -66,14 +66,17 @@ export default class TopicPills
 
 
     titleChanged(event) {
-        console.log(event.target.value);
-        this.setState({topic: {title: event.target.value}});
+        this.setState({newTopic: {title: event.target.value}});
     }
 
 
     createTopic(event) {
+        let addTopic = {title: 'New Topic'};
+        if (this.state.newTopic.title !== '') {
+            addTopic = this.state.newTopic;
+        }
         this.topicService
-            .createTopic(this.state.courseId, this.state.moduleId, this.state.lessonId, this.state.topic)
+            .createTopic(this.state.courseId, this.state.moduleId, this.state.lessonId, addTopic)
             .then(() => {
                 this.findAllTopics(this.state.courseId, this.state.moduleId, this.state.lessonId);
             });
@@ -112,7 +115,7 @@ export default class TopicPills
                         <div className="container-fluid">
                             <input className="form-control form-control-sm"
                                    onChange={this.titleChanged}
-                                   placeholder="title"/>
+                                   placeholder="New Topic"/>
                         </div>
                     </li>
                     <li className="nav-item">

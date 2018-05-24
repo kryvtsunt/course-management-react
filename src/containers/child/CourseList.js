@@ -38,11 +38,15 @@ class CourseList extends React.Component {
     }
 
     createCourse() {
-        this.courseService
-            .createCourse(this.state.newCourse)
-            .then(() => {
-                this.findAllCourses();
-            });
+        let addCourse = {title: 'New Course'};
+        if (this.state.newCourse.title !== '') {
+            addCourse = this.state.newCourse;
+        }
+            this.courseService
+                .createCourse(addCourse)
+                .then(() => {
+                    this.findAllCourses();
+                });
     }
 
     deleteCourse(courseId) {
@@ -85,7 +89,7 @@ class CourseList extends React.Component {
                                 <input onChange={this.titleChanged}
                                        className="form-control"
                                        id="titleFld"
-                                       placeholder="CS101"/>
+                                       placeholder="New Course"/>
                             </th>
                             <th>
                                 <i onClick={this.createCourse}
@@ -98,6 +102,7 @@ class CourseList extends React.Component {
                             <th>Owned by</th>
                             <th>Created</th>
                             <th>Last modified</th>
+                            <th>Action</th>
                         </tr>
 
                         </thead>

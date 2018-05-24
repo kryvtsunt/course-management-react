@@ -32,11 +32,11 @@ class CourseRow extends React.Component {
                 <td>Me</td>
                 <td>{this.getDate(this.props.course.created) + ' | ' + this.getTime(this.props.course.created)}</td>
                 <td>{this.getDate(this.props.course.modified) + ' | ' + this.getTime(this.props.course.modified)}</td>
-                <div>
+                <td>
                     <i className="btn btn-block fa fa-2x fa-trash" onClick={() =>
                     {this.props.delete(this.props.course.id)}}>
                     </i>
-                </div>
+                </td>
             </tr>
 
         )
