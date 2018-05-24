@@ -1,5 +1,5 @@
 const MODULE_API_URL =
-    'https://tk-course-management-react/api/course/CID/module';
+    'https://tk-course-management.herokuapp.com/api/course/CID/module';
 let _singleton = Symbol();
 
 export default class ModuleService {
@@ -25,7 +25,7 @@ export default class ModuleService {
     }
 
     findAllModules() {
-        return fetch('https://tk-course-management-react.herokuapp.com/api/module')
+        return fetch('https://tk-course-management.herokuapp.com/api/module')
             .then(function (response) {
                 return response.json();
             })
@@ -44,7 +44,7 @@ export default class ModuleService {
     }
 
     findModuleById(moduleId) {
-        return fetch('https://tk-course-management-react.herokuapp.com/api/module/' + moduleId)
+        return fetch('https://tk-course-management.herokuapp.com/api/module/' + moduleId)
             .then(function (response) {
                 return response.json();
             });
