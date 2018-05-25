@@ -83,15 +83,17 @@ export default class TopicPills
 
 
     createTopic(event) {
-        let addTopic = {title: 'New Topic'};
-        if (this.state.newTopic.title !== '') {
-            addTopic = this.state.newTopic;
+        if ((this.state.courseId != 'undefined') && (this.state.moduleId != 'undefined') && (this.state.lessonId != 'undefined')) {
+            let addTopic = {title: 'New Topic'};
+            if (this.state.newTopic.title !== '') {
+                addTopic = this.state.newTopic;
+            }
+            this.topicService
+                .createTopic(this.state.courseId, this.state.moduleId, this.state.lessonId, addTopic)
+                .then(() => {
+                    this.findAllTopics(this.state.courseId, this.state.moduleId, this.state.lessonId);
+                });
         }
-        this.topicService
-            .createTopic(this.state.courseId, this.state.moduleId, this.state.lessonId, addTopic)
-            .then(() => {
-                this.findAllTopics(this.state.courseId, this.state.moduleId, this.state.lessonId);
-            });
     }
 
     deleteTopic(courseId, moduleId, lessonId, topicId) {

@@ -75,15 +75,17 @@ export default class LessonTabs
 
 
     createLesson(event) {
-        let addLesson = {title: 'New Lesson'};
-        if (this.state.newLesson.title !== '') {
-            addLesson = this.state.newLesson;
+        if ((this.state.courseId != 'undefined') && (this.state.moduleId != 'undefined')) {
+            let addLesson = {title: 'New Lesson'};
+            if (this.state.newLesson.title !== '') {
+                addLesson = this.state.newLesson;
+            }
+            this.lessonService
+                .createLesson(this.state.courseId, this.state.moduleId, addLesson)
+                .then(() => {
+                    this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
+                });
         }
-        this.lessonService
-            .createLesson(this.state.courseId, this.state.moduleId, addLesson)
-            .then(() => {
-                this.findAllLessonsForModule(this.state.courseId, this.state.moduleId, this.state.lesson);
-            });
     }
 
 
