@@ -1,7 +1,7 @@
-// const MODULE_API_URL =
-//     'https://tk-course-management.herokuapp.com/api/course/CID/module';
 const MODULE_API_URL =
-    'http://localhost:8080/api/course/CID/module';
+    'https://tk-course-management.herokuapp.com/api/course/CID/module';
+// const MODULE_API_URL =
+//     'http://localhost:8080/api/course/CID/module';
 
 let _singleton = Symbol();
 
@@ -27,12 +27,12 @@ export default class ModuleService {
             })
     }
 
-    findAllModules() {
-        return fetch('http://localhost:8080/api/module')
-            .then(function (response) {
-                return response.json();
-            })
-    }
+    // findAllModules() {
+    //     return fetch('http://localhost:8080/api/module')
+    //         .then(function (response) {
+    //             return response.json();
+    //         })
+    // }
 
 
     createModule(courseId, module) {
@@ -47,7 +47,7 @@ export default class ModuleService {
     }
 
     findModuleById(moduleId) {
-        return fetch('http://localhost:8080/api/module/' + moduleId)
+        return fetch(MODULE_API_URL.replace('/course/CID', '') + '/' + moduleId)
             .then(function (response) {
                 return response.json();
             });

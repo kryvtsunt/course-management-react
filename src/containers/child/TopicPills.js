@@ -131,7 +131,7 @@ export default class TopicPills
 
                     <div className="col-3">
                         <nav className="nav">
-                            <form className="form-inline form-group">
+                            <form className="form-inline form-group container-fluid">
                                 <input className="form-control form-control-sm"
                                        onChange={this.titleChanged}
                                        placeholder="New Topic"/>

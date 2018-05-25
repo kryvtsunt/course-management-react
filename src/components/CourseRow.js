@@ -30,8 +30,8 @@ class CourseRow extends React.Component {
                     </Link>
                 </td>
                 <td>Me</td>
-                <td>{this.getDate(this.props.course.created) + ' | ' + this.getTime(this.props.course.created)}</td>
-                <td>{this.getDate(this.props.course.modified) + ' | ' + this.getTime(this.props.course.modified)}</td>
+                <td className="text-center">{this.getDate(this.props.course.created) + ' | ' + this.getTime(this.props.course.created)}</td>
+                <td className="text-center">{this.getDate(this.props.course.modified) + ' | ' + this.getTime(this.props.course.modified)}</td>
                 <td>
                     <i className="btn btn-block fa fa-2x fa-trash" onClick={() =>
                     {this.props.delete(this.props.course.id)}}>

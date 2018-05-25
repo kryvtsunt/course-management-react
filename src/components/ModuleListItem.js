@@ -49,7 +49,7 @@ export default class ModuleListItem
             <li className="list-group-item bg-dark">
                 <div className="btn-group btn-block">
                     <Link
-                        className={(this.props.active == this.props.module.id) ? 'text-white btn btn-block btn-dark active' : 'text-white btn btn-block btn-dark'}
+                        className={(this.props.active == this.props.module.id) ? 'btn btn-block btn-light' : 'text-white btn btn-block btn-dark'}
                         onClick={() => {
                             this.props.setActive(this.props.module.id)
                         }}
@@ -59,8 +59,6 @@ export default class ModuleListItem
                     </Link>
                     <span className="float-right">
                         <i className="btn fa fa-2x fa-times" onClick={() => {
-                            console.log(this.props.active);
-                            console.log(this.props.module.id);
                             (this.props.active != this.props.module.id)
                             ?
                             this.openModal()

@@ -100,9 +100,9 @@ class CourseList extends React.Component {
                         <tr>
                             <th>Title</th>
                             <th>Owned by</th>
-                            <th>Created</th>
-                            <th>Last modified</th>
-                            <th>Action</th>
+                            <th className="text-center">Created</th>
+                            <th className="text-center">Last modified</th>
+                            <th className="text-center">Action</th>
                         </tr>
 
                         </thead>
