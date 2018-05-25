@@ -13,8 +13,8 @@ export default class CourseEditor extends React.Component {
         this.findCourseById = this.findCourseById.bind(this);
         this.state = {
             course: '',
-            courseId: undefined,
-            moduleId: undefined
+            courseId: 'undefined',
+            moduleId: 'undefined'
         };
     }
 
@@ -47,7 +47,6 @@ export default class CourseEditor extends React.Component {
 
     render() {
         return (
-            <Router>
                 <div>
                     <div className="container-fluid">
                         <nav className="navbar navbar-dark" style={{backgroundColor: '#202020'}}>
@@ -73,8 +72,6 @@ export default class CourseEditor extends React.Component {
                     </div>
 
                 </div>
-
-            </Router>
 
         )
     }

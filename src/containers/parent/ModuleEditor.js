@@ -16,10 +16,10 @@ export default class ModuleManager
         this.findModuleById = this.findModuleById.bind(this);
         this.getTitle = this.getTitle.bind(this);
         this.state = {
-            module: undefined,
-            courseId: undefined,
-            moduleId: undefined,
-            lessonId: undefined
+            module: 'undefined',
+            courseId: 'undefined',
+            moduleId: 'undefined',
+            lessonId: 'undefined'
         };
     }
 
@@ -64,7 +64,6 @@ export default class ModuleManager
 
     render() {
         return (
-            <Router>
                 <div className="container-fluid">
                     <br/>
                     <h2 className="text-center">
@@ -72,10 +71,8 @@ export default class ModuleManager
                     </h2>
                     <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>
                     <br/>
-                    {/*<Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId" component={LessonEditor}/>*/}
+                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId" component={LessonEditor}/>
                 </div>
-            </Router>
-
         );
     }
 }

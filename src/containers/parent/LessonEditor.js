@@ -7,10 +7,10 @@ export default class ModuleManager
     constructor(props) {
         super(props);
         this.state = {
-            courseId: undefined,
-            moduleId: undefined,
-            lessonId: undefined,
-            topicId: undefined
+            courseId: 'undefined',
+            moduleId: 'undefined',
+            lessonId: 'undefined',
+            topicId: 'undefined'
         };
 
         this.setCourseId = this.setCourseId.bind(this);

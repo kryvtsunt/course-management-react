@@ -8,8 +8,9 @@ export default class LessonTabs
         super(props);
 
         this.state = {
-            courseId: undefined,
-            moduleId: undefined,
+            courseId: 'undefined',
+            moduleId: 'undefined',
+            lessonId: 'undefined',
             newLesson: {title: ''},
             lessons: []
         };
@@ -56,13 +57,13 @@ export default class LessonTabs
     }
 
     findAllLessonsForModule(courseId, moduleId) {
-        if ((courseId == 'undefined') || (moduleId == 'undefined')) {
-            this.setLessons([]);
-        } else {
+        if ((courseId != 'undefined') && (moduleId != 'undefined')) {
             this.lessonService.findAllLessonsForModule(courseId, moduleId)
                 .then((lessons) => {
                     this.setLessons(lessons)
                 });
+        } else {
+            this.setLessons([]);
         }
     }
 

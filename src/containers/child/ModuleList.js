@@ -12,9 +12,9 @@ export default class ModuleList
         super(props);
         this.state = {
             newModule: {title: ''},
-            courseId: undefined,
+            courseId: 'undefined',
             modules: [],
-            active: undefined
+            active: 'undefined'
         };
 
         this.setCourseId = this.setCourseId.bind(this);
