@@ -58,13 +58,14 @@ export default class ModuleListItem
                         {this.props.module.title}
                     </Link>
                     <span className="float-right">
-                        <i className="btn fa fa-2x fa-times" onClick={() => {
+                        <button className={(this.props.active == this.props.module.id) ? 'btn btn-dark fa fa-2x fa-square invisible' : "btn btn-dark fa fa-2x fa-times"}
+                           onClick={() => {
                             (this.props.active != this.props.module.id)
                             ?
                             this.openModal()
                             //this.props.delete(this.props.courseId, this.props.module.id)
                             : null}}>
-                        </i>
+                        </button>
                     </span>
                     <div>
                         <Modal
