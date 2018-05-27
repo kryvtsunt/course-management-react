@@ -1,25 +1,25 @@
 import React, {Component} from 'react';
 
 
-import {ADD_WIDGET, SAVE, DELETE_WIDGET, FIND_ALL_WIDGETS, SELECT_WIDGET_TYPE} from '../constants/index.js'
+import * as constants from '../constants/index.js'
 
 
 let idAutoIncrement = 3;
 export const widgetReducer = (state = {widgets: []}, action) => {
     switch (action.type) {
-        case ADD_WIDGET:
+        case constants.ADD_WIDGET:
             return {
                 widgets: [...state.widgets, {id: idAutoIncrement++, text: 'New Widget', widgetType: 'Paragraph'}]
             };
-        case DELETE_WIDGET:
+        case constants.DELETE_WIDGET:
             return {
                 widgets: state.widgets.filter(widget => (widget.id !== action.id))
             }
-        case FIND_ALL_WIDGETS:
+        case constants.FIND_ALL_WIDGETS:
             return {
                 widgets: action.widgets
             }
-        case SAVE:
+        case constants.SAVE:
             fetch('http://localhost:8080/api/widget/save',
                 {
                     method: 'post',
@@ -28,7 +28,7 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                         'content-type': 'application/json'
                     }
                 })
-        case SELECT_WIDGET_TYPE:
+        case constants.SELECT_WIDGET_TYPE:
             let newState = {
                 widgets: state.widgets.filter(widget =>
                 {
@@ -39,6 +39,8 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                 })
             }
             return JSON.parse(JSON.stringify(newState));
+        case constants.HEADING_SIZE_CHANGED:
+
 
         default:
             return state
