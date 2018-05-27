@@ -10,7 +10,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 import CourseManager from './containers/parent/CourseManager'
 
-import {widgetReducer} from './reducers/widgetReducer'
+import {widgetReducer} from './reducers/WidgetReducer'
 import {Widgets} from "./containers/child/WidgetList";
 
 
