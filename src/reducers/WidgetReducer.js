@@ -5,7 +5,8 @@ import * as constants from '../constants/index.js'
 
 
 let idAutoIncrement = 3;
-export const widgetReducer = (state = {widgets: []}, action) => {
+export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
+    let newState;
     switch (action.type) {
         case constants.ADD_WIDGET:
             return {
@@ -81,6 +82,13 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                     return Object.assign({}, widget)
                 })
             }
+
+        case constants.PREVIEW:
+            return {
+                widgets: state.widgets,
+                preview: !state.preview
+            }
+
 
 
         default:

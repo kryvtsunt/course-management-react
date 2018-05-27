@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {findAllWidgets, addWidget, save} from "../../actions/index";
+import * as actions from "../../actions";
 import {WidgetContainer}  from "../../components/Widget";
 
 
@@ -14,7 +14,8 @@ class WidgetList extends Component {
         return (
             <div>
                 <h1> Widget List ({this.props.widgets.length}) </h1>
-                <button onClick={this.props.save}>Save</button>
+                <button hidden={this.props.previewMode} onClick={this.props.save}>Save</button>
+                <button onClick={this.props.preview}>Preview</button>
                 <ul>
                     {this.props.widgets.map(widget => (
                         <WidgetContainer widget={widget} key={widget.id}/>
@@ -32,14 +33,16 @@ class WidgetList extends Component {
 
 const stateToPropertyMapper = (state) =>
     ({
-        widgets: state.widgets
+        widgets: state.widgets,
+        previewMode: state.preview
     });
 
 const dispatcherToPropsMapper = dispatch =>
     ({
-        findAllWidgets: () => findAllWidgets(dispatch),
-        addWidget: () => addWidget(dispatch),
-        save: () => save(dispatch)
+        findAllWidgets: () => actions.findAllWidgets(dispatch),
+        addWidget: () => actions.addWidget(dispatch),
+        save: () => actions.save(dispatch),
+        preview: () => actions.preview(dispatch)
     })
 
 export const Widgets = connect(stateToPropertyMapper, dispatcherToPropsMapper)(WidgetList);

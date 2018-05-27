@@ -3,24 +3,26 @@ import {connect} from 'react-redux'
 import {DELETE_WIDGET, SELECT_WIDGET_TYPE} from "../constants/index";
 import * as actions from '../actions/index'
 
-const Heading = ({widget, headingSizeChanged, headingTextChanged}) => {
+const Heading = ({widget, preview, headingSizeChanged, headingTextChanged}) => {
     let selectElement;
     let inputElement;
     return (
         <div>
-            <h2> Heading {widget.size}</h2>
-            <input
-                onChange={()=> headingTextChanged(widget.id, inputElement.value)}
-                value={widget.text}
-                ref={node => inputElement = node}/>
-            <select
-                onChange={() => headingSizeChanged(widget.id, selectElement.value)}
-                value={widget.size}
-                ref={node => selectElement = node}>
-                <option value="1"> Heading 1 </option>
-                <option value="2">  Heading 2 </option>
-                <option value="3">  Heading 3 </option>
-            </select>
+            <div hidden={preview}>
+                <h2> Heading {widget.size}</h2>
+                <input
+                    onChange={() => headingTextChanged(widget.id, inputElement.value)}
+                    value={widget.text}
+                    ref={node => inputElement = node}/>
+                <select
+                    onChange={() => headingSizeChanged(widget.id, selectElement.value)}
+                    value={widget.size}
+                    ref={node => selectElement = node}>
+                    <option value="1"> Heading 1</option>
+                    <option value="2"> Heading 2</option>
+                    <option value="3"> Heading 3</option>
+                </select>
+            </div>
             <h3>Preview</h3>
             {widget.size == 1 && <h1>{widget.text}</h1>}
             {widget.size == 2 && <h2>{widget.text}</h2>}
@@ -52,27 +54,29 @@ const Image = () => (
 )
 
 
-const Widget = ({widget, dispatch}) => {
+const Widget = ({widget, preview, dispatch}) => {
     let selectElement;
     return (
         <li>
-            {/*{widget.id} {widget.text} {widget.widgetType}*/}
-            <select value={widget.widgetType}
-                    onChange={() => dispatch({
-                        type: SELECT_WIDGET_TYPE,
-                        id: widget.id,
-                        widgetType: selectElement.value
-                    })}
-                    ref={node => selectElement = node}>
-                <option> Paragraph</option>
-                <option> Heading</option>
-                <option> List</option>
-                <option> Image</option>
+            <div hidden={preview}>
+                {/*{widget.id} {widget.text} {widget.widgetType}*/}
+                <select value={widget.widgetType}
+                        onChange={() => dispatch({
+                            type: SELECT_WIDGET_TYPE,
+                            id: widget.id,
+                            widgetType: selectElement.value
+                        })}
+                        ref={node => selectElement = node}>
+                    <option> Paragraph</option>
+                    <option> Heading</option>
+                    <option> List</option>
+                    <option> Image</option>
 
-            </select>
-            <button onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id})
-            )}> Delete widget
-            </button>
+                </select>
+                <button onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id})
+                )}> Delete widget
+                </button>
+            </div>
             <div>
                 {widget.widgetType === 'Heading' && <HeadingContainer widget={widget}/>}
                 {widget.widgetType === 'Paragraph' && <Paragraph/>}
@@ -85,6 +89,10 @@ const Widget = ({widget, dispatch}) => {
 }
 
 
+const stateToPropsMapper = state => ({
+    preview: state.preview
+})
+
 const dispatchToPropsMapper = dispatch => ({
     headingSizeChanged: (widgetId, newSize) =>
         actions.headingSizeChanged(dispatch, widgetId, newSize),
@@ -92,5 +100,5 @@ const dispatchToPropsMapper = dispatch => ({
         actions.headingTextChanged(dispatch, widgetId, newText)
 })
 
-export const HeadingContainer = connect(null, dispatchToPropsMapper)(Heading)
-export const WidgetContainer = connect()(Widget)
+export const HeadingContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Heading)
+export const WidgetContainer = connect(stateToPropsMapper)(Widget)
