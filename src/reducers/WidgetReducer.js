@@ -14,7 +14,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                     {
                         id: idAutoIncrement++,
                         text: 'New Widget',
-                        widgetType: 'Paragraph',
+                        widgetType: 'Heading',
                         size: '2',
                     }
                 ]
