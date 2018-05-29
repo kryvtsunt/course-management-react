@@ -29,9 +29,41 @@ export const headingSizeChanged = (dispatch, widgetId, newSize) => (
     })
 )
 
-export const headingTextChanged = (dispatch, widgetId, newText) => (
+export const imageChanged = (dispatch, widgetId, newImage) => (
     dispatch({
-        type: constants.HEADING_TEXT_CHANGED,
+        type: constants.IMAGE_CHANGED,
+        id: widgetId,
+        src: newImage
+    })
+)
+
+export const widthChanged = (dispatch, widgetId, newWidth) => (
+    dispatch({
+        type: constants.WIDTH_CHANGED,
+        id: widgetId,
+        width: newWidth
+    })
+)
+
+export const heightChanged = (dispatch, widgetId, newHeight) => (
+    dispatch({
+        type: constants.HEIGHT_CHANGED,
+        id: widgetId,
+        height: newHeight
+    })
+)
+
+export const listTypeChanged = (dispatch, widgetId, newType) => (
+    dispatch({
+        type: constants.HEADING_SIZE_CHANGED,
+        id: widgetId,
+        listType: newType
+    })
+)
+
+export const textChanged = (dispatch, widgetId, newText) => (
+    dispatch({
+        type: constants.TEXT_CHANGED,
         id: widgetId,
         text: newText
     })

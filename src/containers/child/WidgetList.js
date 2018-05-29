@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actions from "../../actions";
-import {WidgetContainer}  from "../../components/Widget";
+import {WidgetContainer} from "../../components/Widget";
 
 
 class WidgetList extends Component {
@@ -10,16 +10,22 @@ class WidgetList extends Component {
         this.props.findAllWidgets()
     }
 
+
+
     render() {
         return (
             <div className="container-fluid">
                 <h1> Widget List ({this.props.widgets.length}) </h1>
-                <button className="btn btn-success" hidden={this.props.previewMode} onClick={this.props.save}>Save</button>
+                <button className="btn btn-success" hidden={this.props.previewMode} onClick={this.props.save}>Save
+                </button>
                 <button className="btn btn-warning" onClick={this.props.preview}>Preview</button>
                 <ul className="list-group">
-                    {this.props.widgets.map(widget => (
-                        <WidgetContainer widget={widget} key={widget.id}/>
-                    ))}
+                    {this.props.widgets
+                        .sort((a, b) => {
+                            return a.widgetOrder - b.widgetOrder})
+                        .map(widget => (
+                            <WidgetContainer widget={widget} key={widget.id}/>))
+                    }
                 </ul>
                 <button className="btn btn-primary" onClick={this.props.addWidget}>
                     Add widget
@@ -28,7 +34,6 @@ class WidgetList extends Component {
         )
     }
 }
-
 
 
 const stateToPropertyMapper = (state) =>
