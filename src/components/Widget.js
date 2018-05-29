@@ -100,24 +100,28 @@ const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => 
         <div className="">
             <div hidden={preview}>
                 {/*<h2> Heading {widget.size}</h2>*/}
-                <textarea
+                <input
                     className="form-control"
                     onChange={() => imageChanged(widget.id, inputElement.value)}
                     value={widget.src}
                     placeholder="Image URL"
                     ref={node => inputElement = node}/>
-                <textarea
+                <div className="input-group">
+                <input
                     className="form-control"
                     onChange={() => widthChanged(widget.id, inputElement1.value)}
                     value={widget.width}
                     placeholder="Image width"
                     ref={node => inputElement1 = node}/>
-                <textarea
-                    className="form-control"
-                    onChange={() => heightChanged(widget.id, inputElement2.value)}
-                    value={widget.height}
-                    placeholder="Image height"
-                    ref={node => inputElement2 = node}/>
+                    <button className='btn btn-outline-secondary fa fa-plus' onClick={e => widthChanged(widget.id, ++inputElement1.value) }></button>
+                    <button className='btn btn-outline-secondary fa fa-minus' onClick={e => widthChanged(widget.id, --inputElement1.value) }></button>
+                </div>
+                {/*<textarea*/}
+                    {/*className="form-control"*/}
+                    {/*onChange={() => heightChanged(widget.id, inputElement2.value)}*/}
+                    {/*value={widget.height}*/}
+                    {/*placeholder="Image height"*/}
+                    {/*ref={node => inputElement2 = node}/>*/}
                 <br/>
                 <h3>Preview</h3>
             </div>
@@ -182,7 +186,7 @@ const Widget = ({widget, preview, dispatch}) => {
                     <option> Link</option>
 
                 </select>
-                <button className="btn btn-sm btn-danger" onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id})
+                <button className="btn btn-sm btn-danger" onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id, widgetOrder: widget.widgetOrder})
                 )}> Delete widget
                 </button>
                 <button className='btn btn-outline-info fa fa-arrow-up' onClick={e => (dispatch({type: MOVE_UP_WIDGET, widgetOrder: widget.widgetOrder})

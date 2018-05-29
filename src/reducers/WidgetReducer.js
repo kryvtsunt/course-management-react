@@ -30,8 +30,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             return {
                 widgets: state.widgets.filter(widget => (widget.id !== action.id))
                     .map(widget => {
-            if (widget.id > action.id) {
-                widget.order = widget.order - 1;
+            if (widget.widgetOrder > action.widgetOrder) {
+                widget.widgetOrder = widget.widgetOrder - 1;
             }
             return Object.assign({}, widget)
         })
@@ -45,23 +45,24 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             if (action.widgetOrder !== 0) {
                 state.widgets[action.widgetOrder].widgetOrder = action.widgetOrder - 1;
                 state.widgets[action.widgetOrder - 1].widgetOrder = action.widgetOrder;
-                console.log(action.widgetOrder);
+                console.log(state.widgets);
             }
             return {
-                widgets: JSON.parse(JSON.stringify(state.widgets))
+                widgets: Object.values(state.widgets)
             }
 
         case constants.MOVE_DOWN_WIDGET:
             if (action.widgetOrder !== (state.widgets.length - 1)) {
                 state.widgets[action.widgetOrder].widgetOrder = action.widgetOrder + 1;
                 state.widgets[action.widgetOrder + 1].widgetOrder = action.widgetOrder;
-                console.log(action.widgetOrder);
+                console.log(state.widgets);
             }
             return {
-                widgets: JSON.parse(JSON.stringify(state.widgets))
+                widgets: Object.values(state.widgets)
             }
 
         case constants.SAVE:
+            console.log(state.widgets);
             fetch('http://localhost:8080/api/widget/save',
                 {
                     method: 'post',
