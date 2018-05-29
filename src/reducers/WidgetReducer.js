@@ -6,7 +6,6 @@ import * as constants from '../constants/index.js'
 
 
 export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
-    let newState;
     let autoIncrement = state.widgets.length - 1;
     switch (action.type) {
         case constants.ADD_WIDGET:
@@ -112,6 +111,15 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 widgets: state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.src = action.src;
+                    }
+                    return Object.assign({}, widget)
+                })
+            }
+        case constants.LINK_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.href = action.href;
                     }
                     return Object.assign({}, widget)
                 })

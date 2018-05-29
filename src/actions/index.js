@@ -45,6 +45,14 @@ export const widthChanged = (dispatch, widgetId, newWidth) => (
     })
 )
 
+export const linkChanged = (dispatch, widgetId, newLink) => (
+    dispatch({
+        type: constants.LINK_CHANGED,
+        id: widgetId,
+        href: newLink
+    })
+)
+
 export const heightChanged = (dispatch, widgetId, newHeight) => (
     dispatch({
         type: constants.HEIGHT_CHANGED,

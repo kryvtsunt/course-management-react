@@ -128,9 +128,9 @@ const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => 
     )
 }
 
-const Link = ({widget, preview, textChanged, listTypeChanged}) => {
+const Link = ({widget, preview, textChanged, linkChanged}) => {
     let inputElement;
-    let selectElement;
+    let inputElement1;
     return (
         <div className="">
             <div hidden={preview}>
@@ -139,23 +139,19 @@ const Link = ({widget, preview, textChanged, listTypeChanged}) => {
                     className="form-control"
                     onChange={() => textChanged(widget.id, inputElement.value)}
                     value={widget.text}
-                    placeholder="Put your text here"
+                    placeholder="Link text"
                     ref={node => inputElement = node}/>
-                <select className="custom-select"
-                        onChange={() => listTypeChanged(widget.id, selectElement.value)}
-                        value={widget.listType}
-                        ref={node => selectElement = node}>
-                    <option value="Unordered"> Unordered list </option>
-                    <option value="Ordered"> Ordered list</option>
-
-                </select>
+                <textarea
+                    className="form-control"
+                    onChange={() => linkChanged(widget.id, inputElement1.value)}
+                    value={widget.href}
+                    placeholder="URL"
+                    ref={node => inputElement1 = node}/>
                 <br/>
                 <h3>Preview</h3>
             </div>
             <div className="container-fluid text-center">
-                {widget.textType == 'Unordered' && <p>{widget.text}</p>}
-                {widget.textType == 'Ordered' && <p>{widget.text}</p>}
-
+                <a href={widget.href}>{widget.text}</a>
             </div>
         </div>
     )
@@ -225,7 +221,9 @@ const dispatchToPropsMapper = dispatch => ({
     widthChanged: (widgetId, newWidth) =>
         actions.widthChanged(dispatch, widgetId, newWidth),
     heightChanged: (widgetId, newHeight) =>
-        actions.heightChanged(dispatch, widgetId, newHeight)
+        actions.heightChanged(dispatch, widgetId, newHeight),
+    linkChanged: (widgetId, newLink) =>
+        actions.linkChanged(dispatch, widgetId, newLink)
 })
 
 export const HeadingContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Heading)
