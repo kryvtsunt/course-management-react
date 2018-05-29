@@ -53,7 +53,7 @@ const Paragraph = ({widget, preview, textChanged}) => {
                 <h3>Preview</h3>
             </div>
             <div className="container-fluid text-center">
-             {widget.text}
+                {widget.text}
             </div>
         </div>
     )
@@ -76,7 +76,7 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
                         onChange={() => listTypeChanged(widget.id, selectElement.value)}
                         value={widget.listType}
                         ref={node => selectElement = node}>
-                    <option value="Unordered"> Unordered list </option>
+                    <option value="Unordered"> Unordered list</option>
                     <option value="Ordered"> Ordered list</option>
 
                 </select>
@@ -84,12 +84,25 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
                 <h3>Preview</h3>
             </div>
             <div className="container-fluid text-center">
-                {widget.textType == 'Unordered' && <p>{widget.text}</p>}
-                {widget.textType == 'Ordered' && <p>{widget.text}</p>}
+                {widget.listType == 'Unordered' &&
+                <ul>{
+                    widget.text.split('\n').map(line => (
+                    <li>{line}</li>))
+                }</ul>}
+                {widget.listType == 'Ordered' &&
+                <ol>{
+                    widget.text.split('\n').map(line => (
+                        <li>{line}</li>))
+                }</ol>}
 
             </div>
         </div>
     )
+}
+
+const rvm = (str) => {
+    var res = str.split("\n")
+
 }
 
 const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => {
@@ -107,21 +120,23 @@ const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => 
                     placeholder="Image URL"
                     ref={node => inputElement = node}/>
                 <div className="input-group">
-                <input
-                    className="form-control"
-                    onChange={() => widthChanged(widget.id, inputElement1.value)}
-                    value={widget.width}
-                    placeholder="Image width"
-                    ref={node => inputElement1 = node}/>
-                    <button className='btn btn-outline-secondary fa fa-plus' onClick={e => widthChanged(widget.id, ++inputElement1.value) }></button>
-                    <button className='btn btn-outline-secondary fa fa-minus' onClick={e => widthChanged(widget.id, --inputElement1.value) }></button>
+                    <input
+                        className="form-control"
+                        onChange={() => widthChanged(widget.id, inputElement1.value)}
+                        value={widget.width}
+                        placeholder="Image width"
+                        ref={node => inputElement1 = node}/>
+                    <button className='btn btn-outline-secondary fa fa-plus'
+                            onClick={e => widthChanged(widget.id, ++inputElement1.value)}></button>
+                    <button className='btn btn-outline-secondary fa fa-minus'
+                            onClick={e => widthChanged(widget.id, --inputElement1.value)}></button>
                 </div>
                 {/*<textarea*/}
-                    {/*className="form-control"*/}
-                    {/*onChange={() => heightChanged(widget.id, inputElement2.value)}*/}
-                    {/*value={widget.height}*/}
-                    {/*placeholder="Image height"*/}
-                    {/*ref={node => inputElement2 = node}/>*/}
+                {/*className="form-control"*/}
+                {/*onChange={() => heightChanged(widget.id, inputElement2.value)}*/}
+                {/*value={widget.height}*/}
+                {/*placeholder="Image height"*/}
+                {/*ref={node => inputElement2 = node}/>*/}
                 <br/>
                 <h3>Preview</h3>
             </div>
@@ -131,6 +146,7 @@ const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => 
         </div>
     )
 }
+
 
 const Link = ({widget, preview, textChanged, linkChanged}) => {
     let inputElement;
@@ -162,10 +178,6 @@ const Link = ({widget, preview, textChanged, linkChanged}) => {
 }
 
 
-
-
-
-
 const Widget = ({widget, preview, dispatch}) => {
     let selectElement;
     return (
@@ -186,13 +198,16 @@ const Widget = ({widget, preview, dispatch}) => {
                     <option> Link</option>
 
                 </select>
-                <button className="btn btn-sm btn-danger" onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id, widgetOrder: widget.widgetOrder})
-                )}> Delete widget
+                <button className="btn btn-sm btn-danger"
+                        onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id, widgetOrder: widget.widgetOrder})
+                        )}> Delete widget
                 </button>
-                <button className='btn btn-outline-info fa fa-arrow-up' onClick={e => (dispatch({type: MOVE_UP_WIDGET, widgetOrder: widget.widgetOrder})
-                )}></button>
-                <button className='btn btn-outline-info fa fa-arrow-down' onClick={e => (dispatch({type: MOVE_DOWN_WIDGET, widgetOrder: widget.widgetOrder})
-                )}></button>
+                <button className='btn btn-outline-info fa fa-arrow-up'
+                        onClick={e => (dispatch({type: MOVE_UP_WIDGET, widgetOrder: widget.widgetOrder})
+                        )}></button>
+                <button className='btn btn-outline-info fa fa-arrow-down'
+                        onClick={e => (dispatch({type: MOVE_DOWN_WIDGET, widgetOrder: widget.widgetOrder})
+                        )}></button>
             </div>
             <br/>
             <div>

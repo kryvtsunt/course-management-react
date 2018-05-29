@@ -6,18 +6,19 @@ import * as constants from '../constants/index.js'
 
 
 export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
-    let autoIncrement = state.widgets.length - 1;
+    let autoIncrement = state.widgets.length;
+    let idAutoIncrement = state.widgets.length;
     switch (action.type) {
         case constants.ADD_WIDGET:
             return {
                 widgets: [...state.widgets,
                     {
-                        id: autoIncrement++,
-                        widgetOrder: autoIncrement++,
+                        id: idAutoIncrement,
+                        widgetOrder: autoIncrement,
                         text: '',
                         widgetType: 'Heading',
                         listType: 'Unordered',
-                        src: 'http://dlyakota.ru/uploads/posts/2017-11/dlyakota.ru_fotoprikoly-s-kotami_nedovolnye-koty-17-foto_1.jpeg',
+                        src: '',
                         href: '',
                         width: '200',
                         height: '200',
@@ -29,12 +30,12 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             autoIncrement--;
             return {
                 widgets: state.widgets.filter(widget => (widget.id !== action.id))
-                    .map(widget => {
-            if (widget.widgetOrder > action.widgetOrder) {
-                widget.widgetOrder = widget.widgetOrder - 1;
-            }
-            return Object.assign({}, widget)
-        })
+        //             .map(widget => {
+        //     if (widget.widgetOrder > action.widgetOrder) {
+        //         widget.widgetOrder = widget.widgetOrder - 1;
+        //     }
+        //     return Object.assign({}, widget)
+        // })
             }
         case constants.FIND_ALL_WIDGETS:
             return {

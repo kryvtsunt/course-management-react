@@ -63,7 +63,7 @@ export const heightChanged = (dispatch, widgetId, newHeight) => (
 
 export const listTypeChanged = (dispatch, widgetId, newType) => (
     dispatch({
-        type: constants.HEADING_SIZE_CHANGED,
+        type: constants.LIST_TYPE_CHANGED,
         id: widgetId,
         listType: newType
     })
