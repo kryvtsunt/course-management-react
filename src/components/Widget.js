@@ -183,7 +183,7 @@ const Widget = ({widget, preview, dispatch}) => {
     return (
         <li className="list-group-item">
             <div hidden={preview} className="input-group">
-                {widget.widgetOrder}
+                {/*{widget.widgetOrder}*/}
                 <select className="custom-select" value={widget.widgetType}
                         onChange={() => dispatch({
                             type: SELECT_WIDGET_TYPE,

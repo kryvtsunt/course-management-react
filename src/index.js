@@ -20,9 +20,6 @@ let store = createStore(widgetReducer);
 ReactDom.render(
     <div className="container-fluid">
         <CourseManager/>
-        <Provider store={store}>
-            <Widgets/>
-        </Provider>
     </div>
     ,
     document.getElementById('root')
