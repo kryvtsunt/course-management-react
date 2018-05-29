@@ -6,15 +6,14 @@ import * as constants from '../constants/index.js'
 
 
 export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
-    let autoIncrement = state.widgets.length;
-    let idAutoIncrement = state.widgets.length;
+    //let autoIncrement = state.widgets.length;
     switch (action.type) {
         case constants.ADD_WIDGET:
             return {
                 widgets: [...state.widgets,
                     {
-                        id: idAutoIncrement,
-                        widgetOrder: autoIncrement,
+                        id: state.widgets.length,
+                        widgetOrder: state.widgets.length,
                         text: '',
                         widgetType: 'Heading',
                         listType: 'Unordered',
@@ -27,15 +26,15 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 ]
             }
         case constants.DELETE_WIDGET:
-            autoIncrement--;
+            //autoIncrement--;
             return {
                 widgets: state.widgets.filter(widget => (widget.id !== action.id))
-        //             .map(widget => {
-        //     if (widget.widgetOrder > action.widgetOrder) {
-        //         widget.widgetOrder = widget.widgetOrder - 1;
-        //     }
-        //     return Object.assign({}, widget)
-        // })
+                    .map(widget => {
+            if (widget.widgetOrder > action.widgetOrder) {
+                widget.widgetOrder = widget.widgetOrder - 1;
+            }
+            return Object.assign({}, widget)
+        })
             }
         case constants.FIND_ALL_WIDGETS:
             return {
