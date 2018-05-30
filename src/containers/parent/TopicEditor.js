@@ -29,7 +29,7 @@ export default class TopicEditor
 
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setCourseId(this.props.match.params.courseId);
         this.setModuleId(this.props.match.params.moduleId);
         this.setLessonId(this.props.match.params.lessonId);
@@ -71,7 +71,7 @@ export default class TopicEditor
         return (
             <div className="container-fluid">
                     <Provider store={store}>
-                        <Widgets topicId={this.props.match.params.topicId}/>
+                        <Widgets topicId={this.state.topicId}/>
                     </Provider>
             </div>
         );

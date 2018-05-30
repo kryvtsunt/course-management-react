@@ -182,9 +182,9 @@ const Widget = ({widget, preview, dispatch}) => {
     let selectElement;
     return (
         <li className="list-group-item">
-            <div hidden={preview} className="input-group">
+            <div className="input-group">
                 {/*{widget.widgetOrder}*/}
-                <select className="custom-select" value={widget.widgetType}
+                <select hidden={preview} className="custom-select" value={widget.widgetType}
                         onChange={() => dispatch({
                             type: SELECT_WIDGET_TYPE,
                             id: widget.id,
@@ -198,17 +198,22 @@ const Widget = ({widget, preview, dispatch}) => {
                     <option> Link</option>
 
                 </select>
-                <button className="btn btn-sm btn-danger"
+                <button hidden={preview} className="btn btn-sm btn-danger"
                         onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id, widgetOrder: widget.widgetOrder})
                         )}> Delete widget
                 </button>
-                <button className='btn btn-outline-info fa fa-arrow-up'
+                <button  hidden={!preview} className="btn btn-warning fa fa-edit"
+                         onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id, widgetOrder: widget.widgetOrder})
+                         )}>
+                </button>
+                <button hidden={preview} className='btn btn-outline-info fa fa-arrow-up'
                         onClick={e => (dispatch({type: MOVE_UP_WIDGET, widgetOrder: widget.widgetOrder})
                         )}></button>
-                <button className='btn btn-outline-info fa fa-arrow-down'
+                <button hidden={preview} className='btn btn-outline-info fa fa-arrow-down'
                         onClick={e => (dispatch({type: MOVE_DOWN_WIDGET, widgetOrder: widget.widgetOrder})
                         )}></button>
             </div>
+
             <br/>
             <div>
                 {widget.widgetType === 'Heading' && <HeadingContainer widget={widget}/>}

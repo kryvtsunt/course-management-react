@@ -23,7 +23,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         height: '200',
                         size: '2'
                     }
-                ]
+                ],
+                preview: state.preview
             }
         case constants.DELETE_WIDGET:
             //autoIncrement--;
@@ -34,16 +35,18 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 widget.widgetOrder = widget.widgetOrder - 1;
             }
             return Object.assign({}, widget)
-        })
+        }), preview: state.preview
             }
         case constants.FIND_ALL_WIDGETS:
             return {
-                widgets: action.widgets
+                widgets: action.widgets,
+                preview: state.preview
             }
 
         case constants.FIND_ALL_WIDGETS_FOR_TOPIC:
             return {
-                widgets: action.widgets
+                widgets: action.widgets,
+                 preview: state.preview
             }
 
         case constants.MOVE_UP_WIDGET:
@@ -53,7 +56,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 console.log(state.widgets);
             }
             return {
-                widgets: Object.values(state.widgets)
+                widgets: Object.values(state.widgets),
+                preview: state.preview
             }
 
         case constants.MOVE_DOWN_WIDGET:
@@ -63,7 +67,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 console.log(state.widgets);
             }
             return {
-                widgets: Object.values(state.widgets)
+                widgets: Object.values(state.widgets),
+                preview: state.preview
             }
 
         case constants.SAVE_FOR_TOPIC:
@@ -75,7 +80,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         'content-type': 'application/json'
                     }
                 })
-            return {widgets: state.widgets}
+            return state
 
         case constants.SAVE:
             fetch('http://localhost:8080/api/widget',
@@ -86,7 +91,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         'content-type': 'application/json'
                     }
                 })
-            return {widgets: state.widgets}
+            return state
+
 
         // Both ways work:
 
@@ -111,7 +117,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         widget.widgetType = action.widgetType
                     }
                     return Object.assign({}, widget)
-                })
+                }),
+                preview: state.preview
             }
 
         case constants.HEADING_SIZE_CHANGED:
@@ -121,7 +128,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         widget.size = action.size;
                     }
                     return Object.assign({}, widget)
-                })
+                }),
+                preview: state.preview
             }
         case constants.IMAGE_CHANGED:
             return {
@@ -130,7 +138,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         widget.src = action.src;
                     }
                     return Object.assign({}, widget)
-                })
+                }),
+                preview: state.preview
             }
         case constants.LINK_CHANGED:
             return {
@@ -139,7 +148,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         widget.href = action.href;
                     }
                     return Object.assign({}, widget)
-                })
+                }),
+                preview: state.preview
             }
 
         case constants.WIDTH_CHANGED:
@@ -149,7 +159,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         widget.width = action.width;
                     }
                     return Object.assign({}, widget)
-                })
+                }),
+                preview: state.preview
             }
 
         case constants.HEIGHT_CHANGED:
@@ -159,7 +170,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         widget.height = action.height;
                     }
                     return Object.assign({}, widget)
-                })
+                }),
+                preview: state.preview
             }
 
         case constants.LIST_TYPE_CHANGED:
@@ -169,7 +181,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         widget.listType = action.listType;
                     }
                     return Object.assign({}, widget)
-                })
+                }),
+                preview: state.preview
             }
 
         case constants.TEXT_CHANGED:
@@ -179,7 +192,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         widget.text = action.text;
                     }
                     return Object.assign({}, widget)
-                })
+                }),
+                preview: state.preview
             }
 
         case constants.PREVIEW:
@@ -187,7 +201,6 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 widgets: state.widgets,
                 preview: !state.preview
             }
-
 
 
         default:

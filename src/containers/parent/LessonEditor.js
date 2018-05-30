@@ -21,7 +21,7 @@ export default class LessonEditor
 
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setCourseId(this.props.match.params.courseId);
         this.setModuleId(this.props.match.params.moduleId);
         this.setLessonId(this.props.match.params.lessonId);
