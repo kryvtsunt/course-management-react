@@ -9,6 +9,7 @@ export const findAllWidgets = dispatch => {
         }))
 }
 
+
 export const findAllWidgetsForTopic = (dispatch, topicId) => {
     fetch('http://localhost:8080/api/topic/TID/widget'.replace('TID', topicId))
         .then(response => (response.json()))
@@ -16,6 +17,13 @@ export const findAllWidgetsForTopic = (dispatch, topicId) => {
             type: constants.FIND_ALL_WIDGETS_FOR_TOPIC,
             widgets: widgets
         }))
+}
+
+export const setTopicId = (dispatch, topicId) => {
+    dispatch({
+        type: constants.SET_TOPIC_ID,
+        topicId: topicId
+    })
 }
 
 export const addWidget = dispatch => (
@@ -26,10 +34,9 @@ export const save = dispatch => (
     dispatch({type: constants.SAVE})
 )
 
-export const saveForTopic = (dispatch, topicId) => (
-    dispatch ({
+export const saveForTopic = (dispatch) => (
+    dispatch({
         type: constants.SAVE_FOR_TOPIC,
-        topicId: topicId
     })
 )
 

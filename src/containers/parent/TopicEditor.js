@@ -18,15 +18,12 @@ export default class TopicEditor
             moduleId: 'undefined',
             lessonId: 'undefined',
             topicId: 'undefined',
-            widgetId: 'undefined'
         };
 
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.setLessonId = this.setLessonId.bind(this);
         this.setTopicId = this.setTopicId.bind(this);
-        this.setWidgetId = this.setWidgetId.bind(this);
-
     }
 
     componentWillMount() {
@@ -34,7 +31,6 @@ export default class TopicEditor
         this.setModuleId(this.props.match.params.moduleId);
         this.setLessonId(this.props.match.params.lessonId);
         this.setTopicId(this.props.match.params.topicId);
-        this.setWidgetId(this.props.match.params.widgetId);
     }
 
     componentWillReceiveProps(newProps) {
@@ -42,7 +38,7 @@ export default class TopicEditor
         this.setModuleId(newProps.match.params.moduleId);
         this.setLessonId(newProps.match.params.lessonId);
         this.setTopicId(newProps.match.params.topicId);
-        this.setWidgetId(newProps.match.params.widgetId);
+        console.log('Topic Editor ' + newProps.match.params.topicId);
     }
 
 
@@ -62,16 +58,13 @@ export default class TopicEditor
         this.setState({topicId: topicId});
     }
 
-    setWidgetId(widgetId) {
-        this.setState({widgetId: widgetId});
-    }
 
     render() {
 
         return (
             <div className="container-fluid">
                     <Provider store={store}>
-                        <Widgets topicId={this.state.topicId}/>
+                        <Widgets topic={this.state.topicId}/>
                     </Provider>
             </div>
         );

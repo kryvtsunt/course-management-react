@@ -6,31 +6,65 @@ import {WidgetContainer} from "../../components/Widget";
 
 class WidgetList extends Component {
     constructor(props) {
-        super(props)
-        this.props.findAllWidgetsForTopic(this.props.topicId);
-        console.log(this.props.topicId);
+        super(props);
+
+
+    }
+    componentWillMount(){
+        this.props.setTopicId(this.props.topic);
+        this.props.findAllWidgetsForTopic(this.props.topic);
     }
 
+    componentWillReceiveProps(newProps) {
 
+        if (this.props.topicId != newProps.topic) {
+            this.props.setTopicId(newProps.topic);
+            this.props.findAllWidgetsForTopic(newProps.topic);
+        }
+
+    }
 
     render() {
         return (
             <div className="container-fluid">
                 {/*<h1> Widget List ({this.props.widgets.length}) </h1>*/}
-                <button className="btn btn-success" hidden={this.props.previewMode} onClick={() => this.props.saveForTopic(this.props.topicId)}>Save
-                </button>
-                <button className="btn btn-warning" onClick={this.props.preview}>Preview</button>
+                <br/>
+                <div className="navbar ">
+                    {/*<span className="input-group">*/}
+                    <button className={(this.props.previewMode) ? "btn btn-warning container-fluid" : "btn btn-warning"}
+                            onClick={this.props.preview}>
+                        {(this.props.previewMode) ? "Edit" : "Preview"}
+                    </button>
+                    <button className="btn btn-success" hidden={this.props.previewMode}
+                            onClick={() => this.props.saveForTopic()}>Save
+                    </button>
+
+                    {/*</span>*/}
+                </div>
                 <ul className="list-group">
                     {this.props.widgets
                         .sort((a, b) => {
-                            return a.widgetOrder - b.widgetOrder})
+                            return a.widgetOrder - b.widgetOrder
+                        })
                         .map(widget => (
                             <WidgetContainer widget={widget} key={widget.id}/>))
                     }
                 </ul>
-                <i className="btn btn-primary fa fa-plus" onClick={this.props.addWidget}>
+                <input
+                    className=" container-fluid form-control text-center"
+                    hidden={this.props.previewMode}
+                    // onChange={() => nameChanged(widget.id, inputElement.value)}
+                    // value={widget.name}
+                    placeholder="New Widget"
+                    // ref={node => inputElement = node}
+                />
+                <i className="container-fluid btn btn-primary fa fa-plus" hidden={this.props.previewMode}
+                   onClick={this.props.addWidget}>
                     {/*Add widget*/}
                 </i>
+                <br/>
+                <br/>
+                <br/>
             </div>
         )
     }
@@ -39,6 +73,7 @@ class WidgetList extends Component {
 
 const stateToPropertyMapper = (state) =>
     ({
+        topicId: state.topicId,
         widgets: state.widgets,
         previewMode: state.preview
     });
@@ -49,8 +84,9 @@ const dispatcherToPropsMapper = dispatch =>
         findAllWidgetsForTopic: (topicId) => actions.findAllWidgetsForTopic(dispatch, topicId),
         addWidget: () => actions.addWidget(dispatch),
         save: () => actions.save(dispatch),
-        saveForTopic: (topicId) => actions.saveForTopic(dispatch, topicId),
-        preview: () => actions.preview(dispatch)
+        saveForTopic: () => actions.saveForTopic(dispatch),
+        preview: () => actions.preview(dispatch),
+        setTopicId: (topicId) => actions.setTopicId(dispatch, topicId)
     })
 
 export const Widgets = connect(stateToPropertyMapper, dispatcherToPropsMapper)(WidgetList);
