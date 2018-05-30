@@ -69,7 +69,7 @@ export default class TopicEditor
         return (
             <div className="container-fluid">
                     <Provider store={store}>
-                        <Widgets/>
+                        <Widgets topicId={this.props.match.params.topicId}/>
                     </Provider>
             </div>
         );

@@ -7,7 +7,8 @@ import {WidgetContainer} from "../../components/Widget";
 class WidgetList extends Component {
     constructor(props) {
         super(props)
-        this.props.findAllWidgets()
+        this.props.findAllWidgetsForTopic(this.props.topicId);
+        console.log(this.props.topicId);
     }
 
 
@@ -16,7 +17,7 @@ class WidgetList extends Component {
         return (
             <div className="container-fluid">
                 <h1> Widget List ({this.props.widgets.length}) </h1>
-                <button className="btn btn-success" hidden={this.props.previewMode} onClick={this.props.save}>Save
+                <button className="btn btn-success" hidden={this.props.previewMode} onClick={() => this.props.saveForTopic(this.props.topicId)}>Save
                 </button>
                 <button className="btn btn-warning" onClick={this.props.preview}>Preview</button>
                 <ul className="list-group">
@@ -45,8 +46,10 @@ const stateToPropertyMapper = (state) =>
 const dispatcherToPropsMapper = dispatch =>
     ({
         findAllWidgets: () => actions.findAllWidgets(dispatch),
+        findAllWidgetsForTopic: (topicId) => actions.findAllWidgetsForTopic(dispatch, topicId),
         addWidget: () => actions.addWidget(dispatch),
         save: () => actions.save(dispatch),
+        saveForTopic: (topicId) => actions.saveForTopic(dispatch, topicId),
         preview: () => actions.preview(dispatch)
     })
 

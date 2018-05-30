@@ -58,7 +58,7 @@ export default class LessonEditor
                 <div className="container-fluid">
                     {/*Uncoment line below to access topic pills*/}
                     <TopicPills courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId} topicId={this.state.topicId}/>
-                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId/widget/:widgetId" component={TopicEditor}/>
+                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId/widget" component={TopicEditor}/>
                 </div>
         );
     }

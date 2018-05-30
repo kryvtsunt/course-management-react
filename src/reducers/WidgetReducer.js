@@ -41,6 +41,11 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 widgets: action.widgets
             }
 
+        case constants.FIND_ALL_WIDGETS_FOR_TOPIC:
+            return {
+                widgets: action.widgets
+            }
+
         case constants.MOVE_UP_WIDGET:
             if (action.widgetOrder !== 0) {
                 state.widgets[action.widgetOrder].widgetOrder = action.widgetOrder - 1;
@@ -61,9 +66,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 widgets: Object.values(state.widgets)
             }
 
-        case constants.SAVE:
-            console.log(state.widgets);
-            fetch('http://localhost:8080/api/widget/save',
+        case constants.SAVE_FOR_TOPIC:
+            fetch('http://localhost:8080/api/topic/TID/widget'.replace('TID', action.topicId),
                 {
                     method: 'post',
                     body: JSON.stringify(state.widgets),
@@ -71,6 +75,18 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         'content-type': 'application/json'
                     }
                 })
+            return {widgets: state.widgets}
+
+        case constants.SAVE:
+            fetch('http://localhost:8080/api/widget',
+                {
+                    method: 'post',
+                    body: JSON.stringify(state.widgets),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                })
+            return {widgets: state.widgets}
 
         // Both ways work:
 

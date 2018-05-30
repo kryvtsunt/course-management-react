@@ -15,7 +15,6 @@ import {Widgets} from "./containers/child/WidgetList";
 
 
 
-let store = createStore(widgetReducer);
 
 ReactDom.render(
     <div className="container-fluid">
