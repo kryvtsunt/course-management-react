@@ -6,6 +6,9 @@ import {createStore} from 'redux'
 import {widgetReducer} from '../../reducers/WidgetReducer'
 import {Widgets} from "../../containers/child/WidgetList";
 
+
+let store = createStore(widgetReducer);
+
 export default class TopicEditor
     extends React.Component {
     constructor(props) {
@@ -63,9 +66,8 @@ export default class TopicEditor
         this.setState({widgetId: widgetId});
     }
 
-
     render() {
-        let store = createStore(widgetReducer);
+
         return (
             <div className="container-fluid">
                     <Provider store={store}>
