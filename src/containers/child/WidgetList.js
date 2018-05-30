@@ -16,7 +16,7 @@ class WidgetList extends Component {
     render() {
         return (
             <div className="container-fluid">
-                <h1> Widget List ({this.props.widgets.length}) </h1>
+                {/*<h1> Widget List ({this.props.widgets.length}) </h1>*/}
                 <button className="btn btn-success" hidden={this.props.previewMode} onClick={() => this.props.saveForTopic(this.props.topicId)}>Save
                 </button>
                 <button className="btn btn-warning" onClick={this.props.preview}>Preview</button>
@@ -28,9 +28,9 @@ class WidgetList extends Component {
                             <WidgetContainer widget={widget} key={widget.id}/>))
                     }
                 </ul>
-                <button className="btn btn-primary" onClick={this.props.addWidget}>
-                    Add widget
-                </button>
+                <i className="btn btn-primary fa fa-plus" onClick={this.props.addWidget}>
+                    {/*Add widget*/}
+                </i>
             </div>
         )
     }

@@ -53,7 +53,7 @@ const Paragraph = ({widget, preview, textChanged}) => {
                 <h3>Preview</h3>
             </div>
             <div className="container-fluid text-center">
-                {widget.text}
+                {widget.text.replace(/(.{80})/g, "$1\n")}
             </div>
         </div>
     )
@@ -87,12 +87,12 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
                 {widget.listType == 'Unordered' &&
                 <ul>{
                     widget.text.split('\n').map(line => (
-                    <li>{line}</li>))
+                    <li>{line.replace(/(.{80})/g, "$1\n")}</li>))
                 }</ul>}
                 {widget.listType == 'Ordered' &&
                 <ol>{
                     widget.text.split('\n').map(line => (
-                        <li>{line}</li>))
+                        <li>{line.replace(/(.{80})/g, "$1\n")}</li>))
                 }</ol>}
 
             </div>
