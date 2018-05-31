@@ -1,6 +1,3 @@
-import React, {Component} from 'react';
-
-
 import * as constants from '../constants/index.js'
 import {SET_TOPIC_ID} from "../constants/index";
 

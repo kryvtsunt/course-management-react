@@ -1,6 +1,4 @@
 import React from 'react'
-import TopicPills from '../child/TopicPills'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {widgetReducer} from '../../reducers/WidgetReducer'
