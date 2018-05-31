@@ -1,5 +1,9 @@
 import * as constants from '../constants/index.js'
 
+const WIDGET_URL =
+    'http://localhost:8080/api/topic/TID/widget';
+ // 'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
+
 export const findAllWidgets = dispatch => {
     fetch('http://localhost:8080/api/widget')
         .then(response => (response.json()))
@@ -11,7 +15,7 @@ export const findAllWidgets = dispatch => {
 
 
 export const findAllWidgetsForTopic = (dispatch, topicId) => {
-    fetch('http://localhost:8080/api/topic/TID/widget'.replace('TID', topicId))
+    fetch(WIDGET_URL.replace('TID', topicId))
         .then(response => (response.json()))
         .then(widgets => dispatch({
             type: constants.FIND_ALL_WIDGETS_FOR_TOPIC,
@@ -26,8 +30,11 @@ export const setTopicId = (dispatch, topicId) => {
     })
 }
 
-export const addWidget = dispatch => (
-    dispatch({type: constants.ADD_WIDGET})
+export const addWidget = (dispatch, name) => (
+    dispatch({
+        type: constants.ADD_WIDGET,
+        name: name
+    })
 )
 
 export const save = dispatch => (

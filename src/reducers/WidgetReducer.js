@@ -4,21 +4,32 @@ import React, {Component} from 'react';
 import * as constants from '../constants/index.js'
 import {SET_TOPIC_ID} from "../constants/index";
 
-
+const WIDGET_URL =
+    'http://localhost:8080/api/topic/TID/widget'
+    // 'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
 
 export const widgetReducer = (state = {widgets: [], topicId: null, preview: false}, action) => {
     switch (action.type) {
         case constants.ADD_WIDGET:
+            let widgetName;
+            if (action.name === '') {
+                widgetName = "New Widget"
+            } else {
+                widgetName = action.name;
+            }
             return {
                 widgets: [...state.widgets,
                     {
                         id: state.widgets.length,
+                        name: widgetName,
+                        className: '',
                         widgetOrder: state.widgets.length,
                         text: '',
                         widgetType: 'Heading',
                         listType: 'Unordered',
                         src: '',
                         href: '',
+                        style: '',
                         width: '200',
                         height: '200',
                         size: '2'
@@ -53,7 +64,6 @@ export const widgetReducer = (state = {widgets: [], topicId: null, preview: fals
             }
 
         case constants.FIND_ALL_WIDGETS_FOR_TOPIC:
-            console.log(action.widgets);
             return {
                 widgets: action.widgets,
                 preview: state.preview,
@@ -85,7 +95,7 @@ export const widgetReducer = (state = {widgets: [], topicId: null, preview: fals
             }
 
         case constants.SAVE_FOR_TOPIC:
-            fetch('http://localhost:8080/api/topic/TID/widget'.replace('TID', state.topicId),
+            fetch(WIDGET_URL.replace('TID', state.topicId),
                 {
                     method: 'post',
                     body: JSON.stringify(state.widgets),

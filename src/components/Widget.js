@@ -25,6 +25,7 @@ const Heading = ({widget, preview, headingSizeChanged, textChanged}) => {
                     <option value="3"> Heading 3</option>
                 </select>
                 <br/>
+                <br/>
                 <h3>Preview</h3>
             </div>
             <div className="container-fluid text-center">
@@ -48,7 +49,7 @@ const Paragraph = ({widget, preview, textChanged}) => {
                     value={widget.text}
                     placeholder="Put your text here"
                     ref={node => inputElement = node}/>
-
+                <br/>
                 <br/>
                 <h3>Preview</h3>
             </div>
@@ -62,6 +63,7 @@ const Paragraph = ({widget, preview, textChanged}) => {
 const List = ({widget, preview, textChanged, listTypeChanged}) => {
     let inputElement;
     let selectElement;
+    let i=0;
     return (
         <div className="">
             <div hidden={preview}>
@@ -78,8 +80,8 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
                         ref={node => selectElement = node}>
                     <option value="Unordered"> Unordered list</option>
                     <option value="Ordered"> Ordered list</option>
-
                 </select>
+                <br/>
                 <br/>
                 <h3>Preview</h3>
             </div>
@@ -87,12 +89,12 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
                 {widget.listType == 'Unordered' &&
                 <ul>{
                     widget.text.split('\n').map(line => (
-                    <li>{line.replace(/(.{80})/g, "$1\n")}</li>))
+                    <li key={++i}>{line.replace(/(.{80})/g, "$1\n")}</li>))
                 }</ul>}
                 {widget.listType == 'Ordered' &&
                 <ol>{
                     widget.text.split('\n').map(line => (
-                        <li>{line.replace(/(.{80})/g, "$1\n")}</li>))
+                        <li key={++i}>{line.replace(/(.{80})/g, "$1\n")}</li>))
                 }</ol>}
 
             </div>
@@ -138,6 +140,7 @@ const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => 
                 {/*placeholder="Image height"*/}
                 {/*ref={node => inputElement2 = node}/>*/}
                 <br/>
+                <br/>
                 <h3>Preview</h3>
             </div>
             <div className="container-fluid text-center">
@@ -154,7 +157,7 @@ const Link = ({widget, preview, textChanged, linkChanged}) => {
     return (
         <div className="">
             <div hidden={preview}>
-                {/*<h2> Heading {widget.size}</h2>*/}
+                <h6>{widget.name}</h6>
                 <textarea
                     className="form-control"
                     onChange={() => textChanged(widget.id, inputElement.value)}
@@ -167,6 +170,7 @@ const Link = ({widget, preview, textChanged, linkChanged}) => {
                     value={widget.href}
                     placeholder="URL"
                     ref={node => inputElement1 = node}/>
+                <br/>
                 <br/>
                 <h3>Preview</h3>
             </div>
@@ -202,9 +206,7 @@ const Widget = ({widget, preview, dispatch}) => {
                         onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id, widgetOrder: widget.widgetOrder})
                         )}> Delete widget
                 </button>
-                <button  hidden={!preview} className="btn btn-warning fa fa-edit"
-                         onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id, widgetOrder: widget.widgetOrder})
-                         )}>
+                <button  hidden={!preview} className="btn btn-warning fa fa-edit">
                 </button>
                 <button hidden={preview} className='btn btn-outline-info fa fa-arrow-up'
                         onClick={e => (dispatch({type: MOVE_UP_WIDGET, widgetOrder: widget.widgetOrder})
@@ -213,7 +215,7 @@ const Widget = ({widget, preview, dispatch}) => {
                         onClick={e => (dispatch({type: MOVE_DOWN_WIDGET, widgetOrder: widget.widgetOrder})
                         )}></button>
             </div>
-
+            <br/>
             <br/>
             <div>
                 {widget.widgetType === 'Heading' && <HeadingContainer widget={widget}/>}

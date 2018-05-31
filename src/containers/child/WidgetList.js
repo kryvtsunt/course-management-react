@@ -7,13 +7,12 @@ import {WidgetContainer} from "../../components/Widget";
 class WidgetList extends Component {
     constructor(props) {
         super(props);
-
-
-    }
-    componentWillMount(){
         this.props.setTopicId(this.props.topic);
         this.props.findAllWidgetsForTopic(this.props.topic);
+
+
     }
+
 
     componentWillReceiveProps(newProps) {
 
@@ -25,6 +24,7 @@ class WidgetList extends Component {
     }
 
     render() {
+        let inputElement;
         return (
             <div className="container-fluid">
                 {/*<h1> Widget List ({this.props.widgets.length}) </h1>*/}
@@ -53,13 +53,11 @@ class WidgetList extends Component {
                 <input
                     className=" container-fluid form-control text-center"
                     hidden={this.props.previewMode}
-                    // onChange={() => nameChanged(widget.id, inputElement.value)}
-                    // value={widget.name}
                     placeholder="New Widget"
-                    // ref={node => inputElement = node}
+                    ref={node => inputElement = node}
                 />
                 <i className="container-fluid btn btn-primary fa fa-plus" hidden={this.props.previewMode}
-                   onClick={this.props.addWidget}>
+                   onClick={() => this.props.addWidget(inputElement.value)}>
                     {/*Add widget*/}
                 </i>
                 <br/>
@@ -82,7 +80,7 @@ const dispatcherToPropsMapper = dispatch =>
     ({
         findAllWidgets: () => actions.findAllWidgets(dispatch),
         findAllWidgetsForTopic: (topicId) => actions.findAllWidgetsForTopic(dispatch, topicId),
-        addWidget: () => actions.addWidget(dispatch),
+        addWidget: (name) => actions.addWidget(dispatch, name),
         save: () => actions.save(dispatch),
         saveForTopic: () => actions.saveForTopic(dispatch),
         preview: () => actions.preview(dispatch),
