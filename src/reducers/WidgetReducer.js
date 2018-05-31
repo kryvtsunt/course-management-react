@@ -71,7 +71,7 @@ export const widgetReducer = (state = {widgets: [], topicId: null, preview: fals
             if (action.widgetOrder !== 0) {
                 state.widgets[action.widgetOrder].widgetOrder = action.widgetOrder - 1;
                 state.widgets[action.widgetOrder - 1].widgetOrder = action.widgetOrder;
-                console.log(state.widgets);
+
             }
             return {
                 widgets: Object.values(state.widgets),
@@ -83,7 +83,7 @@ export const widgetReducer = (state = {widgets: [], topicId: null, preview: fals
             if (action.widgetOrder !== (state.widgets.length - 1)) {
                 state.widgets[action.widgetOrder].widgetOrder = action.widgetOrder + 1;
                 state.widgets[action.widgetOrder + 1].widgetOrder = action.widgetOrder;
-                console.log(state.widgets);
+
             }
             return {
                 widgets: Object.values(state.widgets),

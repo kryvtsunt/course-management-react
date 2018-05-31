@@ -36,7 +36,6 @@ export default class TopicEditor
         this.setModuleId(newProps.match.params.moduleId);
         this.setLessonId(newProps.match.params.lessonId);
         this.setTopicId(newProps.match.params.topicId);
-        console.log('Topic Editor ' + newProps.match.params.topicId);
     }
 
 
