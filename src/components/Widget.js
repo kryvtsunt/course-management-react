@@ -28,11 +28,12 @@ const Heading = ({widget, preview, headingSizeChanged, textChanged}) => {
                 <br/>
                 <h3>Preview</h3>
             </div>
-            <div className="container-fluid text-center">
+            <div className="container-fluid text-center" >
                 {widget.size == 1 && <h1>{widget.text}</h1>}
                 {widget.size == 2 && <h2>{widget.text}</h2>}
                 {widget.size == 3 && <h3>{widget.text}</h3>}
             </div>
+            <br/>
         </div>
     )
 }
@@ -40,7 +41,7 @@ const Heading = ({widget, preview, headingSizeChanged, textChanged}) => {
 const Paragraph = ({widget, preview, textChanged}) => {
     let inputElement;
     return (
-        <div className="">
+        <div className="" >
             <div hidden={preview}>
                 {/*<h2> Heading {widget.size}</h2>*/}
                 <textarea
@@ -56,6 +57,7 @@ const Paragraph = ({widget, preview, textChanged}) => {
             <div className="container-fluid text-center">
                 {widget.text.replace(/(.{80})/g, "$1\n")}
             </div>
+            <br/>
         </div>
     )
 }
@@ -65,7 +67,7 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
     let selectElement;
     let i=0;
     return (
-        <div className="">
+        <div className="" >
             <div hidden={preview}>
                 {/*<h2> Heading {widget.size}</h2>*/}
                 <textarea
@@ -98,14 +100,11 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
                 }</ol>}
 
             </div>
+            <br/>
         </div>
     )
 }
 
-const rvm = (str) => {
-    var res = str.split("\n")
-
-}
 
 const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => {
     let inputElement;
@@ -142,10 +141,11 @@ const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => 
                 <br/>
                 <br/>
                 <h3>Preview</h3>
+            </div >
+            <div className="container-fluid text-center" >
+                <img className="img-fluid rounded border border-white" src={widget.src} width={widget.width} height={widget.height}/>
             </div>
-            <div className="container-fluid text-center">
-                <img className="img-fluid" src={widget.src} width={widget.width} height={widget.height}/>
-            </div>
+            <br/>
         </div>
     )
 }
@@ -157,7 +157,7 @@ const Link = ({widget, preview, textChanged, linkChanged}) => {
     return (
         <div className="">
             <div hidden={preview}>
-                <h6>{widget.name}</h6>
+
                 <textarea
                     className="form-control"
                     onChange={() => textChanged(widget.id, inputElement.value)}
@@ -177,6 +177,7 @@ const Link = ({widget, preview, textChanged, linkChanged}) => {
             <div className="container-fluid text-center">
                 <a href={widget.href}>{widget.text}</a>
             </div>
+            <br/>
         </div>
     )
 }
@@ -185,9 +186,9 @@ const Link = ({widget, preview, textChanged, linkChanged}) => {
 const Widget = ({widget, preview, dispatch}) => {
     let selectElement;
     return (
-        <li className="list-group-item">
+        <li className="list-group-item" style={{backgroundColor: '#F0F0F0'}}>
+            <h6>{widget.name}</h6>
             <div className="input-group">
-                {/*{widget.widgetOrder}*/}
                 <select hidden={preview} className="custom-select" value={widget.widgetType}
                         onChange={() => dispatch({
                             type: SELECT_WIDGET_TYPE,
@@ -202,9 +203,9 @@ const Widget = ({widget, preview, dispatch}) => {
                     <option> Link</option>
 
                 </select>
-                <button hidden={preview} className="btn btn-sm btn-danger"
+                <button className="btn btn-danger fa fa-times"
                         onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id, widgetOrder: widget.widgetOrder})
-                        )}> Delete widget
+                        )}>
                 </button>
                 <button  hidden={!preview} className="btn btn-warning fa fa-edit">
                 </button>

@@ -10,6 +10,7 @@ _!!! Uncoment TopicTabs container in the LessonEditor to get access to topics (w
 * Active module - highliter that shows current module
 * Updated modification date - each time any action inside course is made (module/lesson/topic is created/deleted), date is changed
 
+
 Server URL: https://github.com/kryvtsunt/course-management
-***
+
 Heroku URL: https://tk-course-management-react.herokuapp.com/courses
