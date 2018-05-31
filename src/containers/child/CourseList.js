@@ -1,6 +1,7 @@
 import React from 'react';
 import CourseRow from '../../components/CourseRow'
 import CourseService from '../../services/CourseSerice'
+import CourseCard from '../../components/CourseCard'
 
 class CourseList extends React.Component {
     constructor() {
@@ -8,11 +9,15 @@ class CourseList extends React.Component {
         this.courseService = CourseService.instance;
         this.state = {
             newCourse: {title: ''},
-            courses: []
+            courses: [],
+            table: true
         };
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
+        this.renderCourseRows = this.renderCourseRows.bind(this);
+        this.renderCourseCards = this.renderCourseCards.bind(this);
+        this.modeChanged = this.modeChanged.bind(this);
     }
 
     componentDidMount() {
@@ -37,16 +42,23 @@ class CourseList extends React.Component {
 
     }
 
+    modeChanged() {
+        this.setState({
+            table: !this.state.table
+        });
+
+    }
+
     createCourse() {
         let addCourse = {title: 'New Course'};
         if (this.state.newCourse.title !== '') {
             addCourse = this.state.newCourse;
         }
-            this.courseService
-                .createCourse(addCourse)
-                .then(() => {
-                    this.findAllCourses();
-                });
+        this.courseService
+            .createCourse(addCourse)
+            .then(() => {
+                this.findAllCourses();
+            });
     }
 
     deleteCourse(courseId) {
@@ -70,32 +82,46 @@ class CourseList extends React.Component {
         return (courses);
     }
 
+    renderCourseCards() {
+        let courses = null;
+        let deleteCourse = this.deleteCourse;
+        if (this.state) {
+            courses = this.state.courses.map(
+                function (course) {
+                    return <CourseCard key={course.id} course={course} delete={deleteCourse}/>
+                });
+        }
+        return (courses);
+    }
+
 
     render() {
         return (
             <div>
                 <div className="container-fluid">
-                    <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-                        <span className="navbar-brand">
-                        <h2>Course List</h2>
-                        </span>
-                    </nav>
-                </div>
-                <div className="container-fluid">
-                    <table className="table table-dark ">
-                        <thead>
-                        <tr>
-                            <th>
+                    <nav className="navbar navbar-expand-sm navbar-dark" style={{backgroundColor: '#202020'}}>
+                        <div className="nav-item container-fluid">
+                            <button className={(this.state.table) ?  "btn btn-dark fa fa-2x fa-table" : "btn btn-dark fa fa-2x fa-th"} onClick ={this.modeChanged}> </button>
+                            <span className="navbar-brand nav-item container-fluid">
+                            <h2>All Courses</h2>
+                            </span>
+                        </div>
+                        <span className="input-group">
                                 <input onChange={this.titleChanged}
                                        className="form-control"
                                        id="titleFld"
                                        placeholder="New Course"/>
-                            </th>
-                            <th>
                                 <i onClick={this.createCourse}
-                                   className="btn btn-outline-dark fa fa-plus">
+                                   className="btn btn-outline-dark fa fa-2x fa-plus">
                                 </i>
-                            </th>
+                        </span>
+                    </nav>
+                </div>
+                <div className="container-fluid" hidden={!this.state.table}>
+                    <table className="table table-dark ">
+                        <thead className="bg-dark">
+                        <tr>
+
                         </tr>
                         <tr>
                             <th>Title</th>
@@ -111,9 +137,12 @@ class CourseList extends React.Component {
                         </tbody>
                     </table>
                 </div>
+                <div className="card-group container-fluid" hidden={this.state.table}>
+                    {this.renderCourseCards()}
+                </div>
             </div>
-        )
+    )
     }
-}
+    }
 
-export default CourseList;
+    export default CourseList;

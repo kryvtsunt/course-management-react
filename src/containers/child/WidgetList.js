@@ -32,11 +32,11 @@ class WidgetList extends Component {
                 <div className="navbar ">
                     {/*<span className="input-group">*/}
                     <button
-                        className={(this.props.previewMode) ? "btn btn-warning container-fluid" : "btn btn-warning"}
+                        className={(this.props.previewMode) ? "btn btn-warning fa fa-toggle-on container-fluid" : "btn btn-warning fa fa-toggle-off"}
                         onClick={this.props.preview}>
-                        {(this.props.previewMode) ? "Edit" : "Preview"}
+                        {(this.props.previewMode) ? "Preview" : "Edit"}
                     </button>
-                    <button className="btn btn-success" hidden={this.props.previewMode}
+                    <button className="btn btn-success fa" hidden={this.props.previewMode}
                             onClick={() => this.props.saveForTopic()}>Save
                     </button>
 
