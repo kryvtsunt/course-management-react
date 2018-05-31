@@ -28,7 +28,7 @@ const Heading = ({widget, preview, headingSizeChanged, textChanged}) => {
                 <br/>
                 <h3>Preview</h3>
             </div>
-            <div className="container-fluid text-center" >
+            <div className="container-fluid text-center">
                 {widget.size == 1 && <h1>{widget.text}</h1>}
                 {widget.size == 2 && <h2>{widget.text}</h2>}
                 {widget.size == 3 && <h3>{widget.text}</h3>}
@@ -41,7 +41,7 @@ const Heading = ({widget, preview, headingSizeChanged, textChanged}) => {
 const Paragraph = ({widget, preview, textChanged}) => {
     let inputElement;
     return (
-        <div className="" >
+        <div className="">
             <div hidden={preview}>
                 {/*<h2> Heading {widget.size}</h2>*/}
                 <textarea
@@ -65,9 +65,9 @@ const Paragraph = ({widget, preview, textChanged}) => {
 const List = ({widget, preview, textChanged, listTypeChanged}) => {
     let inputElement;
     let selectElement;
-    let i=0;
+    let i = 0;
     return (
-        <div className="" >
+        <div className="">
             <div hidden={preview}>
                 {/*<h2> Heading {widget.size}</h2>*/}
                 <textarea
@@ -91,7 +91,7 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
                 {widget.listType == 'Unordered' &&
                 <ul>{
                     widget.text.split('\n').map(line => (
-                    <li key={++i}>{line.replace(/(.{80})/g, "$1\n")}</li>))
+                        <li key={++i}>{line.replace(/(.{80})/g, "$1\n")}</li>))
                 }</ul>}
                 {widget.listType == 'Ordered' &&
                 <ol>{
@@ -141,9 +141,10 @@ const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => 
                 <br/>
                 <br/>
                 <h3>Preview</h3>
-            </div >
-            <div className="container-fluid text-center" >
-                <img className="img-fluid rounded border border-white" src={widget.src} width={widget.width} height={widget.height}/>
+            </div>
+            <div className="container-fluid text-center">
+                <img className="img-fluid rounded border border-white" src={widget.src} width={widget.width}
+                     height={widget.height}/>
             </div>
             <br/>
         </div>
@@ -207,7 +208,7 @@ const Widget = ({widget, preview, dispatch}) => {
                         onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id, widgetOrder: widget.widgetOrder})
                         )}>
                 </button>
-                <button  hidden={!preview} className="btn btn-warning fa fa-edit">
+                <button hidden={!preview} className="btn btn-warning fa fa-edit">
                 </button>
                 <button hidden={preview} className='btn btn-outline-info fa fa-arrow-up'
                         onClick={e => (dispatch({type: MOVE_UP_WIDGET, widgetOrder: widget.widgetOrder})

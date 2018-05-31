@@ -1,8 +1,8 @@
 import * as constants from '../constants/index.js'
 
 const WIDGET_URL =
-    'http://localhost:8080/api/topic/TID/widget';
- // 'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
+    // 'http://localhost:8080/api/topic/TID/widget';
+    'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
 
 export const findAllWidgets = dispatch => {
     fetch('http://localhost:8080/api/widget')
