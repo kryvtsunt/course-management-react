@@ -124,8 +124,8 @@ class CourseList extends React.Component {
 
                         </tr>
                         <tr>
-                            <th>Title</th>
-                            <th>Owned by</th>
+                            <th className="text-center">Title</th>
+                            <th className="text-center">Owned by</th>
                             <th className="text-center">Created</th>
                             <th className="text-center">Last modified</th>
                             <th className="text-center">Action</th>
@@ -137,7 +137,7 @@ class CourseList extends React.Component {
                         </tbody>
                     </table>
                 </div>
-                <div className="card-group container-fluid" hidden={this.state.table}>
+                <div className="card-deck container-fluid" hidden={this.state.table}>
                     {this.renderCourseCards()}
                 </div>
             </div>

@@ -25,11 +25,11 @@ class CourseRow extends React.Component {
         return (
             <tr>
                 <td>
-                    <Link className="text-white" to={`/course/${this.props.course.id}/module/${undefined}/lesson/${undefined}/topic/${undefined}`}>
+                    <Link className="text-white btn btn-dark container-fluid" to={`/course/${this.props.course.id}/module/${undefined}/lesson/${undefined}/topic/${undefined}`}>
                         {this.props.course.title}
                     </Link>
                 </td>
-                <td>Me</td>
+                <td className="text-center">Me</td>
                 <td className="text-center">{this.getDate(this.props.course.created) + ' | ' + this.getTime(this.props.course.created)}</td>
                 <td className="text-center">{this.getDate(this.props.course.modified) + ' | ' + this.getTime(this.props.course.modified)}</td>
                 <td>
