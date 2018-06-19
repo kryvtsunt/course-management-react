@@ -106,7 +106,7 @@ const List = ({widget, preview, textChanged, listTypeChanged}) => {
 }
 
 
-const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => {
+const Image = ({widget, preview, imageChanged, widthChanged}) => {
     let inputElement;
     let inputElement1;
     let inputElement2;
@@ -132,19 +132,12 @@ const Image = ({widget, preview, imageChanged, widthChanged, heightChanged}) => 
                     <button className='btn btn-outline-secondary fa fa-minus'
                             onClick={e => widthChanged(widget.id, --inputElement1.value)}></button>
                 </div>
-                {/*<textarea*/}
-                {/*className="form-control"*/}
-                {/*onChange={() => heightChanged(widget.id, inputElement2.value)}*/}
-                {/*value={widget.height}*/}
-                {/*placeholder="Image height"*/}
-                {/*ref={node => inputElement2 = node}/>*/}
                 <br/>
                 <br/>
                 <h3>Preview</h3>
             </div>
             <div className="container-fluid text-center">
-                <img className="img-fluid rounded border border-white" src={widget.src} width={widget.width}
-                     height={widget.height}/>
+                <img className="img-fluid rounded border border-white" src={widget.src} width={widget.width}/>
             </div>
             <br/>
         </div>
@@ -183,6 +176,54 @@ const Link = ({widget, preview, textChanged, linkChanged}) => {
     )
 }
 
+const Exam = ({widget, preview, textChanged}) => {
+    let inputElement;
+    return (
+        <div className="">
+            <div hidden={preview}>
+                {/*<h2> Heading {widget.size}</h2>*/}
+                <input
+                    className="form-control"
+                    onChange={() => textChanged(widget.id, inputElement.value)}
+                    value={widget.text}
+                    placeholder="Put your text here"
+                    ref={node => inputElement = node}/>
+                <br/>
+                <br/>
+                <h3>Preview</h3>
+            </div>
+            <div className="container-fluid text-center">
+                <h1>{widget.text}</h1>
+            </div>
+            <br/>
+        </div>
+    )
+}
+
+const Assignment = ({widget, preview, textChanged}) => {
+    let inputElement;
+    return (
+        <div className="">
+            <div hidden={preview}>
+                {/*<h2> Heading {widget.size}</h2>*/}
+                <input
+                    className="form-control"
+                    onChange={() => textChanged(widget.id, inputElement.value)}
+                    value={widget.text}
+                    placeholder="Put your text here"
+                    ref={node => inputElement = node}/>
+                <br/>
+                <br/>
+                <h3>Preview</h3>
+            </div>
+            <div className="container-fluid text-center">
+                <h1>{widget.text}</h1>
+            </div>
+            <br/>
+        </div>
+    )
+}
+
 
 const Widget = ({widget, preview, dispatch}) => {
     let selectElement;
@@ -202,6 +243,8 @@ const Widget = ({widget, preview, dispatch}) => {
                     <option> List</option>
                     <option> Image</option>
                     <option> Link</option>
+                    <option> Exam</option>
+                    <option> Assignment</option>
 
                 </select>
                 <button className="btn btn-danger fa fa-times"
@@ -225,6 +268,8 @@ const Widget = ({widget, preview, dispatch}) => {
                 {widget.widgetType === 'List' && <ListContainer widget={widget}/>}
                 {widget.widgetType === 'Image' && <ImageContainer widget={widget}/>}
                 {widget.widgetType === 'Link' && <LinkContainer widget={widget}/>}
+                {widget.widgetType === 'Exam' && <ExamContainer widget={widget}/>}
+                {widget.widgetType === 'Assignment' && <AssignmentContainer widget={widget}/>}
 
             </div>
         </li>
@@ -248,8 +293,6 @@ const dispatchToPropsMapper = dispatch => ({
         actions.imageChanged(dispatch, widgetId, newImage),
     widthChanged: (widgetId, newWidth) =>
         actions.widthChanged(dispatch, widgetId, newWidth),
-    heightChanged: (widgetId, newHeight) =>
-        actions.heightChanged(dispatch, widgetId, newHeight),
     linkChanged: (widgetId, newLink) =>
         actions.linkChanged(dispatch, widgetId, newLink)
 })
@@ -259,4 +302,7 @@ export const ParagraphContainer = connect(stateToPropsMapper, dispatchToPropsMap
 export const ListContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(List)
 export const ImageContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Image)
 export const LinkContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Link)
+export const ExamContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Exam)
+export const AssignmentContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Assignment)
 export const WidgetContainer = connect(stateToPropsMapper)(Widget)
+

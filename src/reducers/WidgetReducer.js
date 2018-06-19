@@ -2,8 +2,8 @@ import * as constants from '../constants/index.js'
 import {SET_TOPIC_ID} from "../constants/index";
 
 const WIDGET_URL =
-    // 'http://localhost:8080/api/topic/TID/widget'
-    'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
+    'http://localhost:8080/api/topic/TID/widget'
+    // 'https://tk-course-management.herokuapp.com/api/topic/TID/widget';
 
 export const widgetReducer = (state = {widgets: [], topicId: null, preview: false}, action) => {
     switch (action.type) {
@@ -19,17 +19,14 @@ export const widgetReducer = (state = {widgets: [], topicId: null, preview: fals
                     {
                         id: state.widgets.length,
                         name: widgetName,
-                        className: '',
                         widgetOrder: state.widgets.length,
                         text: '',
                         widgetType: 'Heading',
                         listType: 'Unordered',
                         src: '',
                         href: '',
-                        style: '',
                         width: '200',
-                        height: '200',
-                        size: '2'
+                        size: '2',
                     }
                 ],
                 preview: state.preview,
@@ -189,17 +186,6 @@ export const widgetReducer = (state = {widgets: [], topicId: null, preview: fals
                 topicId: state.topicId
             }
 
-        case constants.HEIGHT_CHANGED:
-            return {
-                widgets: state.widgets.map(widget => {
-                    if (widget.id === action.id) {
-                        widget.height = action.height;
-                    }
-                    return Object.assign({}, widget)
-                }),
-                preview: state.preview,
-                topicId: state.topicId
-            }
 
         case constants.LIST_TYPE_CHANGED:
             return {

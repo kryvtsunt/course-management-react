@@ -10,7 +10,8 @@ class CourseList extends React.Component {
         this.state = {
             newCourse: {title: ''},
             courses: [],
-            table: true
+            table: true,
+            public: true
         };
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
@@ -18,6 +19,7 @@ class CourseList extends React.Component {
         this.renderCourseRows = this.renderCourseRows.bind(this);
         this.renderCourseCards = this.renderCourseCards.bind(this);
         this.modeChanged = this.modeChanged.bind(this);
+        this.toggleStatus = this.toggleStatus.bind(this);
     }
 
     componentDidMount() {
@@ -42,6 +44,10 @@ class CourseList extends React.Component {
 
     }
 
+    toggleStatus(){
+        this.setState({public: !this.state.public});
+    }
+
     modeChanged() {
         this.setState({
             table: !this.state.table
@@ -54,6 +60,12 @@ class CourseList extends React.Component {
         if (this.state.newCourse.title !== '') {
             addCourse = this.state.newCourse;
         }
+        if (this.state.public){
+            addCourse.status = "public";
+        } else {
+            addCourse.status = "private";
+        }
+        console.log(addCourse.status);
         this.courseService
             .createCourse(addCourse)
             .then(() => {
@@ -101,7 +113,9 @@ class CourseList extends React.Component {
                 <div className="container-fluid">
                     <nav className="navbar navbar-expand-sm navbar-dark" style={{backgroundColor: '#202020'}}>
                         <div className="nav-item container-fluid">
-                            <button className={(this.state.table) ?  "btn btn-dark fa fa-2x fa-table" : "btn btn-dark fa fa-2x fa-th"} onClick ={this.modeChanged}> </button>
+                            <button
+                                className={(this.state.table) ? "btn btn-dark fa fa-2x fa-table" : "btn btn-dark fa fa-2x fa-th"}
+                                onClick={this.modeChanged}></button>
                             <span className="navbar-brand nav-item container-fluid">
                             <h2>All Courses</h2>
                             </span>
@@ -111,6 +125,9 @@ class CourseList extends React.Component {
                                        className="form-control"
                                        id="titleFld"
                                        placeholder="New Course"/>
+                                <i onClick={this.toggleStatus}
+                                   className={(this.state.public) ? "btn btn-dark fa fa-2x fa-users" : "btn btn-dark fa fa-2x fa-user"}>
+                                </i>
                                 <i onClick={this.createCourse}
                                    className="btn btn-outline-dark fa fa-2x fa-plus">
                                 </i>
@@ -141,8 +158,8 @@ class CourseList extends React.Component {
                     {this.renderCourseCards()}
                 </div>
             </div>
-    )
+        )
     }
-    }
+}
 
-    export default CourseList;
+export default CourseList;

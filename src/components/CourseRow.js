@@ -8,17 +8,18 @@ class CourseRow extends React.Component {
     }
 
     getDate(data){
-        let dates = String(data).split("T");
-        let date = dates[0];
-        return date
+        // let dates = String(data).split("T");
+        // let date = dates[0];
+        // return date
+        return ''
     }
 
     getTime(data){
-        let dates = String(data).split("T");
-        let raw = dates[1]
-        let time = raw.split(".")[0];
-        return time
-
+        // let dates = String(data).split("T");
+        // let raw = dates[1]
+        // let time = raw.split(".")[0];
+        // return time
+        return ''
     }
 
     render() {
