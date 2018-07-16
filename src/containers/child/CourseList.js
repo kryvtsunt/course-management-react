@@ -126,6 +126,7 @@ class CourseList extends React.Component {
                                        id="titleFld"
                                        placeholder="New Course"/>
                                 <i onClick={this.toggleStatus}
+                                   title="Status: Public/Private"
                                    className={(this.state.public) ? "btn btn-dark fa fa-2x fa-users" : "btn btn-dark fa fa-2x fa-user"}>
                                 </i>
                                 <i onClick={this.createCourse}
@@ -154,7 +155,7 @@ class CourseList extends React.Component {
                         </tbody>
                     </table>
                 </div>
-                <div className="card-deck container-fluid" hidden={this.state.table}>
+                <div className="card-group container" hidden={this.state.table}>
                     {this.renderCourseCards()}
                 </div>
             </div>

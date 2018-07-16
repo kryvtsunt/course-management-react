@@ -193,7 +193,7 @@ const Exam = ({widget, preview, textChanged}) => {
                 <h3>Preview</h3>
             </div>
             <div className="container-fluid text-center">
-                <h1>{widget.text}</h1>
+                <h3>{widget.text}</h3>
             </div>
             <br/>
         </div>
@@ -217,7 +217,7 @@ const Assignment = ({widget, preview, textChanged}) => {
                 <h3>Preview</h3>
             </div>
             <div className="container-fluid text-center">
-                <h1>{widget.text}</h1>
+                <h3>{widget.text}</h3>
             </div>
             <br/>
         </div>

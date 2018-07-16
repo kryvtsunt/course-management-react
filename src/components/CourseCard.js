@@ -6,7 +6,7 @@ export default class CourseCard
     render() {
         return (
             <div className="col-sm-6 col-md-4 col-lg-3">
-                <div className="card" style={{width: '18rem'}}>
+                <div className="card">
                     <img className="card-img-top"
                          src="https://i2.wp.com/alwaysadragon.com/wp-content/uploads/2017/01/NU2-2.png?fit=300%2C300"/>
                     <div className="card-body">
